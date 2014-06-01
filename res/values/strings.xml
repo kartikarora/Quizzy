@@ -2,7 +2,17 @@
 <resources>
 
     <string name="app_name">Quizzy</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="loginDo">LOGIN</string>
+    <string name="registerDo">REGISTER</string>
+    <string name="resetDo">CLEAR</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 
 </resources>

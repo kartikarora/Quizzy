@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Turquoise" parent="@style/_Turquoise" />
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/turquoize</item>
+    </style>
+
+    <style name="_Turquoise" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:editTextBackground">@drawable/turquoise_edit_text_holo_light</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/turquoise_btn_check_holo_light</item>
+        <item name="android:listChoiceIndicatorSingle">@drawable/turquoise_btn_radio_holo_light</item>
+        <item name="android:buttonStyle">@style/ButtonTurquoise</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonTurquoise</item>
+        <item name="android:dropDownSpinnerStyle">@style/SpinnerTurquoise</item>
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarTurquoise</item>
+        <item name="android:seekBarStyle">@style/SeekBarTurquoise</item>
+        <item name="android:buttonStyleToggle">@style/ToggleTurquoise</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/turquoise_list_selector_holo_light</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/turquoise_activated_background_holo_light</item>
+        <item name="android:fastScrollThumbDrawable">@drawable/turquoise_fastscroll_thumb_holo</item>
+    </style>
+
+</resources>
