@@ -10,9 +10,19 @@
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="loginDo">LOGIN</string>
+    <string name="lp">Lets Play</string>
+    <string name="logout">Logout</string>
     <string name="registerDo">REGISTER</string>
     <string name="resetDo">CLEAR</string>
+    <string name="forgotPasswordDo">SEND MAIL</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="registerIntent">Don\'t have an Account? Sign Up</string>
+    <string name="loginIntent">Already have an Account? Sign In</string>
+    <string name="forgotPasswordIntent">Forgot Password?</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_dash">DashActivity</string>
+    <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
 
 </resources>

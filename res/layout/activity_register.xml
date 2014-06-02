@@ -30,49 +30,72 @@
         tools:ignore="UselessLeaf" >
 
         <EditText
-            android:id="@+id/loginUsername"
+            android:id="@+id/registerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/registerUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username"
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/loginPassword"
+            android:id="@+id/registerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/registerPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:inputType="textPassword" />
 
-        <Button
-            android:id="@+id/loginDo"
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_click"
-            android:text="@string/loginDo"
-            android:textColor="@color/turquoize" />
+            android:background="@null"
+            android:orientation="horizontal"
+            tools:ignore="UselessLeaf" >
+
+            <Button
+                android:id="@+id/registerDo"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:background="@drawable/button_click"
+                android:text="@string/registerDo"
+                android:textColor="@color/turquoize" />
+
+            <Button
+                android:id="@+id/resetDo"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:background="@drawable/button_click"
+                android:text="@string/resetDo"
+                android:textColor="@color/turquoize" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/forgotPasswordIntent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/boxy"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="1dp"
-        android:background="@null"
-        android:text="@string/forgotPasswordIntent"
-        android:textColor="@color/clouds"
-        android:textSize="15sp" />
-
-    <Button
-        android:id="@+id/registerIntent"
+        android:id="@+id/loginIntent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="@null"
-        android:text="@string/registerIntent"
+        android:text="@string/loginIntent"
         android:textColor="@color/clouds"
         android:textSize="15sp" />
 

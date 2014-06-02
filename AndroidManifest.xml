@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/Turquoise" >
         <activity
-            android:name="chipset.quizzy.SplashActivity"
+            android:name="chipset.quizzy.HomeActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
             <intent-filter>
@@ -28,7 +28,33 @@
         </activity>
         <activity
             android:name="chipset.quizzy.LoginActivity"
-            android:label="@string/login" >
+            android:label="@string/login"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="chipset.quizzy.HomeActivity" />
+        </activity>
+        <activity
+            android:name="chipset.quizzy.RegisterActivity"
+            android:label="@string/register"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="chipset.quizzy.HomeActivity" />
+        </activity>
+        <activity
+            android:name="chipset.quizzy.DashActivity"
+            android:label="@string/lp"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="chipset.quizzy.ForgotPasswordActivity"
+            android:label="@string/login"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="chipset.quizzy.menu.SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 

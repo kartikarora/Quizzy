@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/turquoize"
+    tools:context="chipset.quizzy.HomeActivity" >
+
+    <TextView
+        android:id="@+id/homeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/app_name"
+        android:textColor="@color/clouds"
+        android:textSize="80sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/layoutHome"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@null"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:ignore="UselessLeaf" >
+
+        <Button
+            android:id="@+id/loginIntentHome"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_weight=".5"
+            android:background="@drawable/button_click"
+            android:text="@string/loginDo"
+            android:textColor="@color/turquoize" />
+
+        <Button
+            android:id="@+id/registerIntentHome"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight=".5"
+            android:background="@drawable/button_click"
+            android:text="@string/registerDo"
+            android:textColor="@color/turquoize" />
+    </LinearLayout>
+
+</RelativeLayout>

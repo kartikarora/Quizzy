@@ -8,15 +8,25 @@
 package chipset.quizzy;
 
 public final class R {
+    public static final class anim {
+        public static final int animation_fade_in=0x7f040000;
+        public static final int animation_move=0x7f040001;
+    }
+    public static final class array {
+        public static final int pref_example_list_titles=0x7f090000;
+        public static final int pref_example_list_values=0x7f090001;
+        public static final int pref_sync_frequency_titles=0x7f090002;
+        public static final int pref_sync_frequency_values=0x7f090003;
+    }
     public static final class attr {
     }
     public static final class color {
-        public static final int alizarin=0x7f040000;
-        public static final int clouds=0x7f040001;
-        public static final int concrete=0x7f040002;
-        public static final int silver=0x7f040003;
-        public static final int turquoise_color=0x7f040005;
-        public static final int turquoize=0x7f040004;
+        public static final int alizarin=0x7f060000;
+        public static final int clouds=0x7f060001;
+        public static final int concrete=0x7f060002;
+        public static final int silver=0x7f060003;
+        public static final int turquoise_color=0x7f060005;
+        public static final int turquoize=0x7f060004;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -26,8 +36,8 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f050000;
-        public static final int activity_vertical_margin=0x7f050001;
+        public static final int activity_horizontal_margin=0x7f070000;
+        public static final int activity_vertical_margin=0x7f070001;
     }
     public static final class drawable {
         public static final int button_click=0x7f020000;
@@ -129,36 +139,90 @@ public final class R {
         public static final int turquoise_textfield_focused_holo_light=0x7f020060;
     }
     public static final class id {
-        public static final int action_settings=0x7f090006;
-        public static final int loginDo=0x7f090003;
-        public static final int loginPassword=0x7f090002;
-        public static final int loginUsername=0x7f090001;
-        public static final int progress=0x7f090005;
-        public static final int splashTitle=0x7f090004;
-        public static final int title=0x7f090000;
+        public static final int action_logout=0x7f0c0016;
+        public static final int action_settings=0x7f0c0015;
+        public static final int boxy=0x7f0c0002;
+        public static final int forgotPasswordDo=0x7f0c0004;
+        public static final int forgotPasswordEmail=0x7f0c0003;
+        public static final int forgotPasswordIntent=0x7f0c000c;
+        public static final int homeTitle=0x7f0c0005;
+        public static final int layoutHome=0x7f0c0006;
+        public static final int loginDo=0x7f0c000b;
+        public static final int loginIntent=0x7f0c0014;
+        public static final int loginIntentHome=0x7f0c0007;
+        public static final int loginPassword=0x7f0c000a;
+        public static final int loginUsername=0x7f0c0009;
+        public static final int registerDo=0x7f0c0012;
+        public static final int registerEmail=0x7f0c0010;
+        public static final int registerIntent=0x7f0c000d;
+        public static final int registerIntentHome=0x7f0c0008;
+        public static final int registerName=0x7f0c000e;
+        public static final int registerPassword=0x7f0c0011;
+        public static final int registerUsername=0x7f0c000f;
+        public static final int resetDo=0x7f0c0013;
+        public static final int title=0x7f0c0001;
+        public static final int welcomeTitle=0x7f0c0000;
     }
     public static final class layout {
-        public static final int activity_login=0x7f030000;
-        public static final int activity_splash=0x7f030001;
+        public static final int activity_dash=0x7f030000;
+        public static final int activity_forgot_password=0x7f030001;
+        public static final int activity_home=0x7f030002;
+        public static final int activity_login=0x7f030003;
+        public static final int activity_register=0x7f030004;
     }
     public static final class menu {
-        public static final int login=0x7f080000;
-        public static final int splash=0x7f080001;
+        public static final int dash=0x7f0b0000;
+        public static final int forgot_password=0x7f0b0001;
+        public static final int login=0x7f0b0002;
+        public static final int register=0x7f0b0003;
+        public static final int splash=0x7f0b0004;
     }
     public static final class string {
-        public static final int action_settings=0x7f060001;
-        public static final int app_name=0x7f060000;
-        public static final int email=0x7f060007;
-        public static final int login=0x7f06000b;
-        public static final int loginDo=0x7f060008;
-        public static final int name=0x7f060004;
-        public static final int password=0x7f060006;
-        public static final int register=0x7f06000c;
-        public static final int registerDo=0x7f060009;
-        public static final int resetDo=0x7f06000a;
-        public static final int title_activity_login=0x7f060003;
-        public static final int title_activity_splash=0x7f060002;
-        public static final int username=0x7f060005;
+        public static final int action_settings=0x7f080001;
+        public static final int app_name=0x7f080000;
+        public static final int email=0x7f080007;
+        public static final int forgotPasswordDo=0x7f08000d;
+        public static final int forgotPasswordIntent=0x7f080012;
+        public static final int hello_world=0x7f080014;
+        public static final int login=0x7f08000e;
+        public static final int loginDo=0x7f080008;
+        public static final int loginIntent=0x7f080011;
+        public static final int logout=0x7f08000a;
+        public static final int lp=0x7f080009;
+        public static final int name=0x7f080004;
+        public static final int password=0x7f080006;
+        public static final int pref_default_display_name=0x7f08001c;
+        public static final int pref_description_social_recommendations=0x7f08001a;
+        /**  Example settings for Data & Sync 
+         */
+        public static final int pref_header_data_sync=0x7f08001e;
+        /**  Strings related to Settings 
+ Example General settings 
+         */
+        public static final int pref_header_general=0x7f080018;
+        /**  Example settings for Notifications 
+         */
+        public static final int pref_header_notifications=0x7f080021;
+        public static final int pref_ringtone_silent=0x7f080024;
+        public static final int pref_title_add_friends_to_messages=0x7f08001d;
+        public static final int pref_title_display_name=0x7f08001b;
+        public static final int pref_title_new_message_notifications=0x7f080022;
+        public static final int pref_title_ringtone=0x7f080023;
+        public static final int pref_title_social_recommendations=0x7f080019;
+        public static final int pref_title_sync_frequency=0x7f08001f;
+        public static final int pref_title_system_sync_settings=0x7f080020;
+        public static final int pref_title_vibrate=0x7f080025;
+        public static final int register=0x7f08000f;
+        public static final int registerDo=0x7f08000b;
+        public static final int registerIntent=0x7f080010;
+        public static final int resetDo=0x7f08000c;
+        public static final int title_activity_dash=0x7f080015;
+        public static final int title_activity_forgot_password=0x7f080016;
+        public static final int title_activity_login=0x7f080003;
+        public static final int title_activity_register=0x7f080013;
+        public static final int title_activity_settings=0x7f080017;
+        public static final int title_activity_splash=0x7f080002;
+        public static final int username=0x7f080005;
     }
     public static final class style {
         /** 
@@ -182,19 +246,25 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f0a0000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
-        public static final int ButtonTurquoise=0x7f070002;
-        public static final int ImageButtonTurquoise=0x7f070003;
-        public static final int MyActionBar=0x7f070009;
-        public static final int ProgressBarTurquoise=0x7f070005;
-        public static final int SeekBarTurquoise=0x7f070006;
-        public static final int SpinnerTurquoise=0x7f070004;
-        public static final int ToggleTurquoise=0x7f070007;
-        public static final int Turquoise=0x7f070008;
-        public static final int _Turquoise=0x7f07000a;
+        public static final int AppTheme=0x7f0a0001;
+        public static final int ButtonTurquoise=0x7f0a0002;
+        public static final int ImageButtonTurquoise=0x7f0a0003;
+        public static final int MyActionBar=0x7f0a0009;
+        public static final int ProgressBarTurquoise=0x7f0a0005;
+        public static final int SeekBarTurquoise=0x7f0a0006;
+        public static final int SpinnerTurquoise=0x7f0a0004;
+        public static final int ToggleTurquoise=0x7f0a0007;
+        public static final int Turquoise=0x7f0a0008;
+        public static final int _Turquoise=0x7f0a000a;
+    }
+    public static final class xml {
+        public static final int pref_data_sync=0x7f050000;
+        public static final int pref_general=0x7f050001;
+        public static final int pref_headers=0x7f050002;
+        public static final int pref_notification=0x7f050003;
     }
 }

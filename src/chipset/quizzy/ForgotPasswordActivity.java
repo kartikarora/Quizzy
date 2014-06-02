@@ -1,9 +1,10 @@
 package chipset.quizzy;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,43 +16,30 @@ import android.widget.Toast;
 import chipset.quizzy.menu.SettingsActivity;
 import chipset.quizzy.resources.Functions;
 
-import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.RequestPasswordResetCallback;
 
-public class LoginActivity extends Activity {
-	EditText loginUsername, loginPassword;
-	Button loginDo, registerIntent, forgotPasswordIntent;
-	String username, password;
+public class ForgotPasswordActivity extends Activity {
+
+	Button forgotPasswordDo;
+	EditText forgotPasswordEmail;
+	String email;
 	Functions functions = new Functions();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-
-		loginDo = (Button) findViewById(R.id.loginDo);
-		registerIntent = (Button) findViewById(R.id.registerIntent);
-		loginUsername = (EditText) findViewById(R.id.loginUsername);
-		loginPassword = (EditText) findViewById(R.id.loginPassword);
-		forgotPasswordIntent = (Button) findViewById(R.id.forgotPasswordIntent);
-		Typeface tf = null;
-		loginPassword.setTypeface(tf);
+		setContentView(R.layout.activity_forgot_password);
 
 		getActionBar().setIcon(R.drawable.ic_launcher_activity);
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
-		forgotPasswordIntent.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
+		forgotPasswordDo = (Button) findViewById(R.id.forgotPasswordDo);
+		forgotPasswordEmail = (EditText) findViewById(R.id.forgotPasswordEmail);
 
-				startActivity(new Intent(getApplication(),
-						ForgotPasswordActivity.class));
-			}
-		});
-
-		loginDo.setOnClickListener(new OnClickListener() {
+		forgotPasswordDo.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -59,14 +47,13 @@ public class LoginActivity extends Activity {
 						getCurrentFocus());
 				if (functions.isConnected(getApplicationContext())) {
 
-					username = loginUsername.getText().toString();
-					password = loginPassword.getText().toString();
+					email = forgotPasswordEmail.getText().toString();
 
-					if (username.isEmpty() || password.isEmpty()) {
+					if (email.isEmpty()) {
 
 						Toast.makeText(getApplicationContext(),
-								"Username and/or Password missing",
-								Toast.LENGTH_SHORT).show();
+								"Enter a valid email", Toast.LENGTH_SHORT)
+								.show();
 					} else {
 						functions.initParse(getApplicationContext());
 						Toast.makeText(getApplicationContext(), "Coming Soon",
@@ -75,26 +62,34 @@ public class LoginActivity extends Activity {
 								getApplicationContext());
 						pDialog.setTitle("Please Wait");
 						pDialog.setCancelable(true);
-						pDialog.setMessage("Logggin In...");
+						pDialog.setMessage("Requesting...");
 						pDialog.setIndeterminate(false);
 						pDialog.show();
-						ParseUser.logInInBackground(username, password,
-								new LogInCallback() {
-									public void done(ParseUser user,
-											ParseException e) {
-										if (user != null) {
+						ParseUser.requestPasswordResetInBackground(email,
+								new RequestPasswordResetCallback() {
+									public void done(ParseException e) {
+										if (e == null) {
 											pDialog.dismiss();
-											Intent toDash = new Intent(
-													getApplication(),
-													DashActivity.class);
-											Toast.makeText(
-													getApplicationContext(),
-													"Logged In Successfully",
-													Toast.LENGTH_SHORT).show();
-											// Close all views before launching
-											startActivity(toDash);
-											toDash.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-													| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+											AlertDialog.Builder builder = new AlertDialog.Builder(
+													getApplication());
+											builder.setTitle("Sample Alert");
+											builder.setMessage("Sample One Action Button Alert");
+											builder.setNeutralButton(
+													"OK",
+													new DialogInterface.OnClickListener() {
+														public void onClick(
+																DialogInterface dialog,
+
+																int which) {
+															Intent toLogin = new Intent(
+																	getApplication(),
+																	LoginActivity.class);
+															startActivity(toLogin);
+															toLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+																	| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+														}
+													});
+											builder.show();
 										} else {
 											e.printStackTrace();
 											pDialog.dismiss();
@@ -115,23 +110,13 @@ public class LoginActivity extends Activity {
 			}
 		});
 
-		registerIntent.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(getApplication(),
-						RegisterActivity.class));
-				finish();
-
-			}
-		});
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login, menu);
+		getMenuInflater().inflate(R.menu.forgot_password, menu);
 		return true;
 	}
 
@@ -149,5 +134,4 @@ public class LoginActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
 }
