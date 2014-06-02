@@ -262,9 +262,6 @@ public final class R {
         public static final int _Turquoise=0x7f0a000a;
     }
     public static final class xml {
-        public static final int pref_data_sync=0x7f050000;
-        public static final int pref_general=0x7f050001;
-        public static final int pref_headers=0x7f050002;
-        public static final int pref_notification=0x7f050003;
+        public static final int settings=0x7f050000;
     }
 }

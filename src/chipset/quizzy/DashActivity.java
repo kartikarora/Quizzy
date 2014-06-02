@@ -3,17 +3,32 @@ package chipset.quizzy;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import chipset.quizzy.menu.SettingsActivity;
 import chipset.quizzy.resources.Functions;
 
-import com.parse.ParseUser;
-
 public class DashActivity extends Activity {
 
 	Functions functions = new Functions();
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.i("onPasue", "called");
+		functions.closeParse(getApplicationContext());
+		Log.i("onPasue", "closed");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.i("onResume", "called");
+		functions.initParse(getApplicationContext());
+		Log.i("onResume", "closed");
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +58,11 @@ public class DashActivity extends Activity {
 			startActivity(new Intent(getApplication(), SettingsActivity.class));
 			return true;
 		} else if (id == R.id.action_logout) {
-			functions.initParse(getApplicationContext());
-			ParseUser.logOut();
+
+			functions.logout(getApplication(), getApplicationContext());
 
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 }

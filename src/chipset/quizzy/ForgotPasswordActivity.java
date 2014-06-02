@@ -4,16 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import chipset.quizzy.menu.SettingsActivity;
 import chipset.quizzy.resources.Functions;
 
 import com.parse.ParseException;
@@ -26,6 +24,22 @@ public class ForgotPasswordActivity extends Activity {
 	EditText forgotPasswordEmail;
 	String email;
 	Functions functions = new Functions();
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.i("onPasue", "called");
+		functions.closeParse(getApplicationContext());
+		Log.i("onPasue", "closed");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.i("onResume", "called");
+		functions.initParse(getApplicationContext());
+		Log.i("onResume", "closed");
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,47 +69,40 @@ public class ForgotPasswordActivity extends Activity {
 								"Enter a valid email", Toast.LENGTH_SHORT)
 								.show();
 					} else {
-						functions.initParse(getApplicationContext());
-						Toast.makeText(getApplicationContext(), "Coming Soon",
-								Toast.LENGTH_SHORT).show();
 						final ProgressDialog pDialog = new ProgressDialog(
-								getApplicationContext());
+								ForgotPasswordActivity.this);
 						pDialog.setTitle("Please Wait");
 						pDialog.setCancelable(true);
 						pDialog.setMessage("Requesting...");
 						pDialog.setIndeterminate(false);
 						pDialog.show();
+
 						ParseUser.requestPasswordResetInBackground(email,
 								new RequestPasswordResetCallback() {
 									public void done(ParseException e) {
 										if (e == null) {
 											pDialog.dismiss();
 											AlertDialog.Builder builder = new AlertDialog.Builder(
-													getApplication());
-											builder.setTitle("Sample Alert");
-											builder.setMessage("Sample One Action Button Alert");
+													ForgotPasswordActivity.this);
+											builder.setTitle("Mail Sent");
+											builder.setMessage("Please login with new password to continue");
 											builder.setNeutralButton(
 													"OK",
 													new DialogInterface.OnClickListener() {
 														public void onClick(
 																DialogInterface dialog,
-
 																int which) {
-															Intent toLogin = new Intent(
-																	getApplication(),
-																	LoginActivity.class);
-															startActivity(toLogin);
-															toLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-																	| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+															finish();
 														}
 													});
+											builder.create();
 											builder.show();
 										} else {
 											e.printStackTrace();
 											pDialog.dismiss();
 											Toast.makeText(
 													getApplicationContext(),
-													"Oops, Something Went Wrong",
+													e.getMessage(),
 													Toast.LENGTH_SHORT).show();
 										}
 									}
@@ -113,23 +120,12 @@ public class ForgotPasswordActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.forgot_password, menu);
-		return true;
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			startActivity(new Intent(getApplication(), SettingsActivity.class));
-			return true;
-		} else if (id == android.R.id.home) {
+		if (id == android.R.id.home) {
 			onBackPressed();
 		}
 		return super.onOptionsItemSelected(item);

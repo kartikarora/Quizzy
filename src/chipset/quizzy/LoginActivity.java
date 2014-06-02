@@ -5,14 +5,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import chipset.quizzy.menu.SettingsActivity;
 import chipset.quizzy.resources.Functions;
 
 import com.parse.LogInCallback;
@@ -20,10 +19,27 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class LoginActivity extends Activity {
+
 	EditText loginUsername, loginPassword;
 	Button loginDo, registerIntent, forgotPasswordIntent;
 	String username, password;
 	Functions functions = new Functions();
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.i("onPasue", "called");
+		functions.closeParse(getApplicationContext());
+		Log.i("onPasue", "closed");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.i("onResume", "called");
+		functions.initParse(getApplicationContext());
+		Log.i("onResume", "closed");
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +75,8 @@ public class LoginActivity extends Activity {
 						getCurrentFocus());
 				if (functions.isConnected(getApplicationContext())) {
 
-					username = loginUsername.getText().toString();
-					password = loginPassword.getText().toString();
+					username = loginUsername.getText().toString().trim();
+					password = loginPassword.getText().toString().trim();
 
 					if (username.isEmpty() || password.isEmpty()) {
 
@@ -68,16 +84,14 @@ public class LoginActivity extends Activity {
 								"Username and/or Password missing",
 								Toast.LENGTH_SHORT).show();
 					} else {
-						functions.initParse(getApplicationContext());
-						Toast.makeText(getApplicationContext(), "Coming Soon",
-								Toast.LENGTH_SHORT).show();
 						final ProgressDialog pDialog = new ProgressDialog(
-								getApplicationContext());
+								LoginActivity.this);
 						pDialog.setTitle("Please Wait");
 						pDialog.setCancelable(true);
 						pDialog.setMessage("Logggin In...");
 						pDialog.setIndeterminate(false);
 						pDialog.show();
+
 						ParseUser.logInInBackground(username, password,
 								new LogInCallback() {
 									public void done(ParseUser user,
@@ -92,15 +106,15 @@ public class LoginActivity extends Activity {
 													"Logged In Successfully",
 													Toast.LENGTH_SHORT).show();
 											// Close all views before launching
-											startActivity(toDash);
 											toDash.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 													| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+											startActivity(toDash);
 										} else {
 											e.printStackTrace();
 											pDialog.dismiss();
 											Toast.makeText(
 													getApplicationContext(),
-													"Oops, Something Went Wrong",
+													e.getMessage(),
 													Toast.LENGTH_SHORT).show();
 										}
 									}
@@ -128,23 +142,12 @@ public class LoginActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			startActivity(new Intent(getApplication(), SettingsActivity.class));
-			return true;
-		} else if (id == android.R.id.home) {
+		if (id == android.R.id.home) {
 			onBackPressed();
 		}
 		return super.onOptionsItemSelected(item);

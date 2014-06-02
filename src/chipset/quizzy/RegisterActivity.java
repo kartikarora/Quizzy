@@ -6,14 +6,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import chipset.quizzy.menu.SettingsActivity;
 import chipset.quizzy.resources.Functions;
 
 import com.parse.ParseException;
@@ -26,6 +25,22 @@ public class RegisterActivity extends Activity {
 	Button registerDo, resetDo, loginIntent;
 	String name, username, email, password;
 	Functions functions = new Functions();
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.i("onPasue", "called");
+		functions.closeParse(getApplicationContext());
+		Log.i("onPasue", "closed");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.i("onResume", "called");
+		functions.initParse(getApplicationContext());
+		Log.i("onResume", "closed");
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +70,10 @@ public class RegisterActivity extends Activity {
 						getCurrentFocus());
 				if (functions.isConnected(getApplicationContext())) {
 
-					name = registerName.getText().toString();
-					username = registerUsername.getText().toString();
-					email = registerEmail.getText().toString();
-					password = registerPassword.getText().toString();
+					name = registerName.getText().toString().trim();
+					username = registerUsername.getText().toString().trim();
+					email = registerEmail.getText().toString().trim();
+					password = registerPassword.getText().toString().trim();
 
 					if (name.isEmpty() || username.isEmpty() || email.isEmpty()
 							|| password.isEmpty()) {
@@ -67,16 +82,14 @@ public class RegisterActivity extends Activity {
 								"Enter all the details", Toast.LENGTH_SHORT)
 								.show();
 					} else {
-						functions.initParse(getApplicationContext());
-						Toast.makeText(getApplicationContext(), "Coming Soon",
-								Toast.LENGTH_SHORT).show();
 						final ProgressDialog pDialog = new ProgressDialog(
-								getApplicationContext());
+								RegisterActivity.this);
 						pDialog.setTitle("Please Wait");
 						pDialog.setCancelable(true);
 						pDialog.setMessage("Registering...");
 						pDialog.setIndeterminate(false);
 						pDialog.show();
+
 						ParseUser user = new ParseUser();
 						user.put(KEY_NAME, name);
 						user.setUsername(username);
@@ -93,18 +106,20 @@ public class RegisterActivity extends Activity {
 											"Registered Successfully",
 											Toast.LENGTH_SHORT).show();
 									// Close all views before launching
-									startActivity(toLogin);
 									toLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 											| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+									startActivity(toLogin);
+
 								} else {
-									e.printStackTrace();
 									pDialog.dismiss();
+									e.printStackTrace();
 									Toast.makeText(getApplicationContext(),
-											"Oops, Something Went Wrong",
-											Toast.LENGTH_SHORT).show();
+											e.getMessage(), Toast.LENGTH_SHORT)
+											.show();
 								}
 							}
 						});
+
 					}
 				} else {
 					Toast.makeText(getApplicationContext(),
@@ -139,23 +154,12 @@ public class RegisterActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.register, menu);
-		return true;
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			startActivity(new Intent(getApplication(), SettingsActivity.class));
-			return true;
-		} else if (id == android.R.id.home) {
+		if (id == android.R.id.home) {
 			onBackPressed();
 		}
 		return super.onOptionsItemSelected(item);

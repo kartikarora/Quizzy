@@ -2,29 +2,28 @@ package chipset.quizzy.resources;
 
 import static chipset.quizzy.resources.Constants.APPLICATION_ID;
 import static chipset.quizzy.resources.Constants.CLIENT_KEY;
+import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import chipset.quizzy.HomeActivity;
 
 import com.parse.Parse;
+import com.parse.ParseUser;
 
 public class Functions {
-
-	/*
-	 * Function to initialize Parse
-	 */
-	public void initParse(Context context) {
-		Parse.initialize(context, APPLICATION_ID, CLIENT_KEY);
-	}
 
 	/*
 	 * Function to get connection status
@@ -87,4 +86,56 @@ public class Functions {
 		mNotifyMgr.notify(0, mBuilder);
 	}
 
+	/*
+	 * Function to logout user
+	 */
+	public void logout(Application application, Context context) {
+
+		Intent toHome = new Intent(application, HomeActivity.class);
+		toHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+				| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		ParseUser.logOut();
+		context.startActivity(toHome);
+	}
+
+	/*
+	 * Function to initialize parse
+	 */
+
+	public void initParse(Context context) {
+
+		Log.i("initParse()", "Called");
+		SharedPreferences prefGet = context
+				.getSharedPreferences("ParseInit", 0);
+		int val = prefGet.getInt("ParseInit", 0);
+		if (val == 0) {
+			SharedPreferences prefPut = context.getSharedPreferences(
+					"ParseInit", 0);
+			Parse.initialize(context, APPLICATION_ID, CLIENT_KEY);
+			Editor editor = prefPut.edit();
+			editor.clear();
+			editor.putInt("ParseInit", 1);
+			editor.commit();
+			Log.i("ParseInit", "Initialized");
+		} else {
+
+			Log.i("ParseInit", "Not Initialized");
+		}
+		Log.i("initParse()", "Closed");
+	}
+
+	/*
+	 * Funtion to shut down Parse onPause()
+	 */
+	public void closeParse(Context context) {
+
+		Log.i("ParseInit", "Closing");
+		SharedPreferences prefPut = context
+				.getSharedPreferences("ParseInit", 0);
+		Editor editor = prefPut.edit();
+		editor.clear();
+		editor.putInt("ParseInit", 0);
+		editor.commit();
+		Log.i("ParseInit", "Closed");
+	}
 }

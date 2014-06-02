@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -11,8 +12,29 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import chipset.quizzy.resources.Functions;
+
+import com.parse.ParseUser;
 
 public class HomeActivity extends Activity {
+
+	Functions functions = new Functions();
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.i("onPasue", "called");
+		functions.closeParse(getApplicationContext());
+		Log.i("onPasue", "closed");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.i("onResume", "called");
+		functions.initParse(getApplicationContext());
+		Log.i("onResume", "closed");
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +71,27 @@ public class HomeActivity extends Activity {
 
 			@Override
 			public void run() {
-				TextView homeTitle = (TextView) findViewById(R.id.homeTitle);
-				Animation animMove = AnimationUtils.loadAnimation(
-						getApplicationContext(), R.anim.animation_move);
-				homeTitle.startAnimation(animMove);
 
-				Animation animFadeIn = AnimationUtils.loadAnimation(
-						getApplicationContext(), R.anim.animation_fade_in);
+				ParseUser currentUser = ParseUser.getCurrentUser();
+				if (currentUser != null) {
+					Intent toDash = new Intent(getApplication(),
+							DashActivity.class);
+					toDash.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+							| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					startActivity(toDash);
+				} else {
+					TextView homeTitle = (TextView) findViewById(R.id.homeTitle);
+					Animation animMove = AnimationUtils.loadAnimation(
+							getApplicationContext(), R.anim.animation_move);
+					homeTitle.startAnimation(animMove);
 
-				layoutHome.setVisibility(View.VISIBLE);
-				layoutHome.startAnimation(animFadeIn);
+					Animation animFadeIn = AnimationUtils.loadAnimation(
+							getApplicationContext(), R.anim.animation_fade_in);
+
+					layoutHome.setVisibility(View.VISIBLE);
+					layoutHome.startAnimation(animFadeIn);
+				}
+
 			}
 		}, 2000); // wait for 2 seconds
 	}
