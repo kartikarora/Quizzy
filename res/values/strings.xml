@@ -24,5 +24,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_dash">DashActivity</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <string name="settings">Settings</string>
 
 </resources>

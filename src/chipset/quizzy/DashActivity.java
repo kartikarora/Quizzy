@@ -3,7 +3,6 @@ package chipset.quizzy;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -15,25 +14,11 @@ public class DashActivity extends Activity {
 	Functions functions = new Functions();
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-		Log.i("onPasue", "called");
-		functions.closeParse(getApplicationContext());
-		Log.i("onPasue", "closed");
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Log.i("onResume", "called");
-		functions.initParse(getApplicationContext());
-		Log.i("onResume", "closed");
-	}
-
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dash);
+		
+		getActionBar().setIcon(R.drawable.ic_launcher_activity);
 
 		TextView welcomeTitle = (TextView) findViewById(R.id.welcomeTitle);
 

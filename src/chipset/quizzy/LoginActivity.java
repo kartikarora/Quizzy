@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,21 +24,7 @@ public class LoginActivity extends Activity {
 	String username, password;
 	Functions functions = new Functions();
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		Log.i("onPasue", "called");
-		functions.closeParse(getApplicationContext());
-		Log.i("onPasue", "closed");
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Log.i("onResume", "called");
-		functions.initParse(getApplicationContext());
-		Log.i("onResume", "closed");
-	}
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

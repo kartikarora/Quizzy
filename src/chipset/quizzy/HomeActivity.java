@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -20,21 +19,7 @@ public class HomeActivity extends Activity {
 
 	Functions functions = new Functions();
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		Log.i("onPasue", "called");
-		functions.closeParse(getApplicationContext());
-		Log.i("onPasue", "closed");
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Log.i("onResume", "called");
-		functions.initParse(getApplicationContext());
-		Log.i("onResume", "closed");
-	}
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
