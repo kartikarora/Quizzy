@@ -3,32 +3,36 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <style name="ButtonTurquoise" parent="android:Widget.Holo.Light.Button">
-	  <item name="android:background">@drawable/turquoise_btn_default_holo_light</item>
-  </style>
+    <style name="ButtonTurquoise" parent="android:Widget.Holo.Light.Button">
+        <item name="android:background">@drawable/turquoise_btn_default_holo_light</item>
+    </style>
 
-  <style name="ImageButtonTurquoise" parent="android:Widget.Holo.Light.ImageButton">
-	  <item name="android:background">@drawable/turquoise_btn_default_holo_light</item>
-  </style>
+    <style name="ImageButtonTurquoise" parent="android:Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/turquoise_btn_default_holo_light</item>
+    </style>
 
-  <style name="SpinnerTurquoise" parent="android:Widget.Holo.Light.Spinner">
-      <item name="android:background">@drawable/turquoise_spinner_background_holo_light</item>
-      <item name="android:dropDownSelector">@drawable/turquoise_list_selector_holo_light</item>
-  </style>
+    <style name="SpinnerTurquoise" parent="android:Widget.Holo.Light.Spinner">
+        <item name="android:background">@drawable/turquoise_spinner_background_holo_light</item>
+        <item name="android:dropDownSelector">@drawable/turquoise_list_selector_holo_light</item>
+    </style>
 
-  <style name="ProgressBarTurquoise" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
-      <item name="android:progressDrawable">@drawable/turquoise_progress_horizontal_holo_light</item>
-      <item name="android:indeterminateDrawable">@drawable/turquoise_progress_indeterminate_horizontal_holo_light</item>
-  </style>
+    <style name="ProgressBarTurquoise" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/turquoise_progress_horizontal_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/turquoise_progress_indeterminate_horizontal_holo_light</item>
+    </style>
 
-  <style name="SeekBarTurquoise" parent="android:Widget.Holo.Light.SeekBar">
-      <item name="android:progressDrawable">@drawable/turquoise_scrubber_progress_horizontal_holo_light</item>
-      <item name="android:indeterminateDrawable">@drawable/turquoise_scrubber_progress_horizontal_holo_light</item>
-      <item name="android:thumb">@drawable/turquoise_scrubber_control_selector_holo_light</item>
-  </style>
+    <style name="SeekBarTurquoise" parent="android:Widget.Holo.Light.SeekBar">
+        <item name="android:progressDrawable">@drawable/turquoise_scrubber_progress_horizontal_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/turquoise_scrubber_progress_horizontal_holo_light</item>
+        <item name="android:thumb">@drawable/turquoise_scrubber_control_selector_holo_light</item>
+    </style>
 
-  <style name="ToggleTurquoise" parent="android:Widget.Holo.Light.Button.Toggle">
-      <item name="android:background">@drawable/turquoise_btn_toggle_holo_light</item>
-  </style>
+    <style name="ToggleTurquoise" parent="android:Widget.Holo.Light.Button.Toggle">
+        <item name="android:background">@drawable/turquoise_btn_toggle_holo_light</item>
+    </style>
+
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/green_sea</item>
+    </style>
 
 </resources>

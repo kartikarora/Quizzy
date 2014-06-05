@@ -24,8 +24,9 @@ public final class R {
         public static final int alizarin=0x7f060000;
         public static final int clouds=0x7f060001;
         public static final int concrete=0x7f060002;
+        public static final int green_sea=0x7f060005;
         public static final int silver=0x7f060003;
-        public static final int turquoise_color=0x7f060005;
+        public static final int turquoise_color=0x7f060006;
         public static final int turquoize=0x7f060004;
     }
     public static final class dimen {
@@ -140,27 +141,28 @@ public final class R {
     }
     public static final class id {
         public static final int action_logout=0x7f0c0016;
-        public static final int action_settings=0x7f0c0015;
-        public static final int boxy=0x7f0c0002;
-        public static final int forgotPasswordDo=0x7f0c0004;
-        public static final int forgotPasswordEmail=0x7f0c0003;
-        public static final int forgotPasswordIntent=0x7f0c000c;
-        public static final int homeTitle=0x7f0c0005;
-        public static final int layoutHome=0x7f0c0006;
-        public static final int loginDo=0x7f0c000b;
-        public static final int loginIntent=0x7f0c0014;
-        public static final int loginIntentHome=0x7f0c0007;
-        public static final int loginPassword=0x7f0c000a;
-        public static final int loginUsername=0x7f0c0009;
-        public static final int registerDo=0x7f0c0012;
-        public static final int registerEmail=0x7f0c0010;
-        public static final int registerIntent=0x7f0c000d;
-        public static final int registerIntentHome=0x7f0c0008;
-        public static final int registerName=0x7f0c000e;
-        public static final int registerPassword=0x7f0c0011;
-        public static final int registerUsername=0x7f0c000f;
-        public static final int resetDo=0x7f0c0013;
-        public static final int title=0x7f0c0001;
+        public static final int action_settings=0x7f0c0017;
+        public static final int adminText=0x7f0c0001;
+        public static final int boxy=0x7f0c0003;
+        public static final int forgotPasswordDo=0x7f0c0005;
+        public static final int forgotPasswordEmail=0x7f0c0004;
+        public static final int forgotPasswordIntent=0x7f0c000d;
+        public static final int homeTitle=0x7f0c0006;
+        public static final int layoutHome=0x7f0c0007;
+        public static final int loginDo=0x7f0c000c;
+        public static final int loginIntent=0x7f0c0015;
+        public static final int loginIntentHome=0x7f0c0008;
+        public static final int loginPassword=0x7f0c000b;
+        public static final int loginUsername=0x7f0c000a;
+        public static final int registerDo=0x7f0c0013;
+        public static final int registerEmail=0x7f0c0011;
+        public static final int registerIntent=0x7f0c000e;
+        public static final int registerIntentHome=0x7f0c0009;
+        public static final int registerName=0x7f0c000f;
+        public static final int registerPassword=0x7f0c0012;
+        public static final int registerUsername=0x7f0c0010;
+        public static final int resetDo=0x7f0c0014;
+        public static final int title=0x7f0c0002;
         public static final int welcomeTitle=0x7f0c0000;
     }
     public static final class layout {
@@ -179,6 +181,7 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f080001;
+        public static final int adminText=0x7f080018;
         public static final int app_name=0x7f080000;
         public static final int email=0x7f080007;
         public static final int forgotPasswordDo=0x7f08000d;
@@ -191,27 +194,27 @@ public final class R {
         public static final int lp=0x7f080009;
         public static final int name=0x7f080004;
         public static final int password=0x7f080006;
-        public static final int pref_default_display_name=0x7f08001d;
-        public static final int pref_description_social_recommendations=0x7f08001b;
+        public static final int pref_default_display_name=0x7f08001e;
+        public static final int pref_description_social_recommendations=0x7f08001c;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f08001f;
+        public static final int pref_header_data_sync=0x7f080020;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f080019;
+        public static final int pref_header_general=0x7f08001a;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f080022;
-        public static final int pref_ringtone_silent=0x7f080025;
-        public static final int pref_title_add_friends_to_messages=0x7f08001e;
-        public static final int pref_title_display_name=0x7f08001c;
-        public static final int pref_title_new_message_notifications=0x7f080023;
-        public static final int pref_title_ringtone=0x7f080024;
-        public static final int pref_title_social_recommendations=0x7f08001a;
-        public static final int pref_title_sync_frequency=0x7f080020;
-        public static final int pref_title_system_sync_settings=0x7f080021;
-        public static final int pref_title_vibrate=0x7f080026;
+        public static final int pref_header_notifications=0x7f080023;
+        public static final int pref_ringtone_silent=0x7f080026;
+        public static final int pref_title_add_friends_to_messages=0x7f08001f;
+        public static final int pref_title_display_name=0x7f08001d;
+        public static final int pref_title_new_message_notifications=0x7f080024;
+        public static final int pref_title_ringtone=0x7f080025;
+        public static final int pref_title_social_recommendations=0x7f08001b;
+        public static final int pref_title_sync_frequency=0x7f080021;
+        public static final int pref_title_system_sync_settings=0x7f080022;
+        public static final int pref_title_vibrate=0x7f080027;
         public static final int register=0x7f08000f;
         public static final int registerDo=0x7f08000b;
         public static final int registerIntent=0x7f080010;
@@ -221,11 +224,12 @@ public final class R {
         public static final int title_activity_forgot_password=0x7f080016;
         public static final int title_activity_login=0x7f080003;
         public static final int title_activity_register=0x7f080013;
-        public static final int title_activity_settings=0x7f080018;
+        public static final int title_activity_settings=0x7f080019;
         public static final int title_activity_splash=0x7f080002;
         public static final int username=0x7f080005;
     }
     public static final class style {
+        public static final int ActionBar=0x7f0a0008;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -254,12 +258,11 @@ public final class R {
         public static final int AppTheme=0x7f0a0001;
         public static final int ButtonTurquoise=0x7f0a0002;
         public static final int ImageButtonTurquoise=0x7f0a0003;
-        public static final int MyActionBar=0x7f0a0009;
         public static final int ProgressBarTurquoise=0x7f0a0005;
         public static final int SeekBarTurquoise=0x7f0a0006;
         public static final int SpinnerTurquoise=0x7f0a0004;
         public static final int ToggleTurquoise=0x7f0a0007;
-        public static final int Turquoise=0x7f0a0008;
+        public static final int Turquoise=0x7f0a0009;
         public static final int _Turquoise=0x7f0a000a;
     }
     public static final class xml {

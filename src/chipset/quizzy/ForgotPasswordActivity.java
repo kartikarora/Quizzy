@@ -57,7 +57,7 @@ public class ForgotPasswordActivity extends Activity {
 						final ProgressDialog pDialog = new ProgressDialog(
 								ForgotPasswordActivity.this);
 						pDialog.setTitle("Please Wait");
-						pDialog.setCancelable(true);
+						pDialog.setCancelable(false);
 						pDialog.setMessage("Requesting...");
 						pDialog.setIndeterminate(false);
 						pDialog.show();

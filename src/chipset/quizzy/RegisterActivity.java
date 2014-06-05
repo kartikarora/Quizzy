@@ -70,7 +70,7 @@ public class RegisterActivity extends Activity {
 						final ProgressDialog pDialog = new ProgressDialog(
 								RegisterActivity.this);
 						pDialog.setTitle("Please Wait");
-						pDialog.setCancelable(true);
+						pDialog.setCancelable(false);
 						pDialog.setMessage("Registering...");
 						pDialog.setIndeterminate(false);
 						pDialog.show();

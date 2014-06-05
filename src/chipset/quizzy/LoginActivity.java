@@ -1,6 +1,7 @@
 package chipset.quizzy;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -23,8 +24,6 @@ public class LoginActivity extends Activity {
 	Button loginDo, registerIntent, forgotPasswordIntent;
 	String username, password;
 	Functions functions = new Functions();
-
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +71,7 @@ public class LoginActivity extends Activity {
 						final ProgressDialog pDialog = new ProgressDialog(
 								LoginActivity.this);
 						pDialog.setTitle("Please Wait");
-						pDialog.setCancelable(true);
+						pDialog.setCancelable(false);
 						pDialog.setMessage("Logggin In...");
 						pDialog.setIndeterminate(false);
 						pDialog.show();
@@ -83,17 +82,36 @@ public class LoginActivity extends Activity {
 											ParseException e) {
 										if (user != null) {
 											pDialog.dismiss();
-											Intent toDash = new Intent(
-													getApplication(),
-													DashActivity.class);
-											Toast.makeText(
-													getApplicationContext(),
-													"Logged In Successfully",
-													Toast.LENGTH_SHORT).show();
-											// Close all views before launching
-											toDash.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-													| Intent.FLAG_ACTIVITY_CLEAR_TASK);
-											startActivity(toDash);
+											ParseUser currentUser = ParseUser
+													.getCurrentUser();
+											boolean emailVerified = (Boolean) currentUser
+													.get("emailVerified");
+											if (emailVerified == true) {
+												Intent toDash = new Intent(
+														getApplication(),
+														DashActivity.class);
+												Toast.makeText(
+														getApplicationContext(),
+														"Logged In Successfully",
+														Toast.LENGTH_SHORT)
+														.show();
+												// Close all views before
+												// launching
+												toDash.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+														| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+												startActivity(toDash);
+
+											} else {
+												AlertDialog.Builder builder = new AlertDialog.Builder(
+														LoginActivity.this);
+												builder.setTitle("Email Verification");
+												builder.setMessage("Please complete email verfication before logging in");
+												builder.setNeutralButton("OK",
+														null);
+												builder.create();
+												builder.show();
+											}
+
 										} else {
 											e.printStackTrace();
 											pDialog.dismiss();
