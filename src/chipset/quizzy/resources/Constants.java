@@ -4,8 +4,8 @@ public class Constants {
 
 	// Parse
 
-	public static String APPLICATION_ID = "t8u9iN9ExDh61db7WqurJQbNbOrI3LgX1tYbaKaI";
-	public static String CLIENT_KEY = "gPSiVhCUcYpudQUe1SUSQkLOBTitlEuuMmZNoNqK";
+	public static String APPLICATION_ID = "PARSE_APP_ID";
+	public static String CLIENT_KEY = "PARSE_CLIENT_KEY";
 
 	// KEY
 
