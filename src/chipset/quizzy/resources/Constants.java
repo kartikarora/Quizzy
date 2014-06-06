@@ -4,8 +4,8 @@ public class Constants {
 
 	// Parse
 
-	public static String APPLICATION_ID = "PARSE_APP_ID";
-	public static String CLIENT_KEY = "PARSE_CLIENT_KEY";
+	public static String APPLICATION_ID = "APPLICATION_ID";
+	public static String CLIENT_KEY = "CLIENT_KEY";
 
 	// KEY
 

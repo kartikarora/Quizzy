@@ -3,6 +3,11 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <style name="AutoCompleteTextViewTurquoise" parent="android:Widget.Holo.Light.AutoCompleteTextView">
+        <item name="android:dropDownSelector">@drawable/turquoise_list_selector_holo_light</item>
+        <item name="android:background">@drawable/turquoise_edit_text_holo_light</item>
+    </style>
+
     <style name="ButtonTurquoise" parent="android:Widget.Holo.Light.Button">
         <item name="android:background">@drawable/turquoise_btn_default_holo_light</item>
     </style>
@@ -16,6 +21,26 @@
         <item name="android:dropDownSelector">@drawable/turquoise_list_selector_holo_light</item>
     </style>
 
+    <style name="TabTurquoise">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+        <item name="android:background">@drawable/turquoise_tab_indicator_holo</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minWidth">80dip</item>
+    </style>
+
+    <style name="TabTextTurquoise">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <!-- v14 <item name="android:textAllCaps">true</item> -->
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:maxWidth">180dip</item>
+    </style>
+
     <style name="ProgressBarTurquoise" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/turquoise_progress_horizontal_holo_light</item>
         <item name="android:indeterminateDrawable">@drawable/turquoise_progress_indeterminate_horizontal_holo_light</item>
@@ -25,6 +50,21 @@
         <item name="android:progressDrawable">@drawable/turquoise_scrubber_progress_horizontal_holo_light</item>
         <item name="android:indeterminateDrawable">@drawable/turquoise_scrubber_progress_horizontal_holo_light</item>
         <item name="android:thumb">@drawable/turquoise_scrubber_control_selector_holo_light</item>
+    </style>
+
+    <style name="RatingBarTurquoise" parent="android:Widget.Holo.Light.RatingBar">
+        <item name="android:progressDrawable">@drawable/turquoise_ratingbar_full_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/turquoise_ratingbar_full_holo_light</item>
+    </style>
+
+    <style name="RatingBarBigTurquoise" parent="android:Widget.Holo.Light.RatingBar.Indicator">
+        <item name="android:progressDrawable">@drawable/turquoise_ratingbar_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/turquoise_ratingbar_holo_light</item>
+    </style>
+
+    <style name="RatingBarSmallTurquoise" parent="android:Widget.Holo.Light.RatingBar.Small">
+        <item name="android:progressDrawable">@drawable/turquoise_ratingbar_small_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/turquoise_ratingbar_small_holo_light</item>
     </style>
 
     <style name="ToggleTurquoise" parent="android:Widget.Holo.Light.Button.Toggle">

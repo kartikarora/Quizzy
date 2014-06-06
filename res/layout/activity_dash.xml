@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/turquoize"
-    tools:context="chipset.quizzy.HomeActivity" >
+    android:background="@color/turquoize" >
 
     <TextView
         android:id="@+id/welcomeTitle"

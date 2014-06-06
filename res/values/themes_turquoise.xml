@@ -5,9 +5,14 @@
 
     <style name="Turquoise" parent="@style/_Turquoise" />
 
-    <style name="_Turquoise" parent="android:Theme.Holo.Light">
+    <style name="_Turquoise" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="android:editTextBackground">@drawable/turquoise_edit_text_holo_light</item>
+        <item name="android:textColorHighlight">#991abc9c</item>
+        <item name="android:textSelectHandleLeft">@drawable/turquoise_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/turquoise_text_select_handle_right</item>
+        <item name="android:textSelectHandle">@drawable/turquoise_text_select_handle_middle</item>
+        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewTurquoise</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/turquoise_btn_check_holo_light</item>
         <item name="android:listChoiceIndicatorSingle">@drawable/turquoise_btn_radio_holo_light</item>
         <item name="android:buttonStyle">@style/ButtonTurquoise</item>
@@ -15,6 +20,9 @@
         <item name="android:dropDownSpinnerStyle">@style/SpinnerTurquoise</item>
         <item name="android:progressBarStyleHorizontal">@style/ProgressBarTurquoise</item>
         <item name="android:seekBarStyle">@style/SeekBarTurquoise</item>
+        <item name="android:ratingBarStyle">@style/RatingBarTurquoise</item>
+        <item name="android:ratingBarStyleIndicator">@style/RatingBarBigTurquoise</item>
+        <item name="android:ratingBarStyleSmall">@style/RatingBarSmallTurquoise</item>
         <item name="android:buttonStyleToggle">@style/ToggleTurquoise</item>
         <item name="android:listChoiceBackgroundIndicator">@drawable/turquoise_list_selector_holo_light</item>
         <item name="android:activatedBackgroundIndicator">@drawable/turquoise_activated_background_holo_light</item>
