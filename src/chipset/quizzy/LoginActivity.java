@@ -58,15 +58,17 @@ public class LoginActivity extends Activity {
 				functions.hideKeyboard(getApplicationContext(),
 						getCurrentFocus());
 				if (functions.isConnected(getApplicationContext())) {
-
+					loginUsername.setError(null);
+					loginPassword.setError(null);
 					username = loginUsername.getText().toString().trim();
 					password = loginPassword.getText().toString().trim();
 
-					if (username.isEmpty() || password.isEmpty()) {
+					if (username.isEmpty()) {
+						loginUsername.setError("Username cannot be left empty");
+					}
+					if (password.isEmpty()) {
 
-						Toast.makeText(getApplicationContext(),
-								"Username and/or Password missing",
-								Toast.LENGTH_SHORT).show();
+						loginPassword.setError("Password cannot be left empty");
 					} else {
 						final ProgressDialog pDialog = new ProgressDialog(
 								LoginActivity.this);

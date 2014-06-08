@@ -25,8 +25,6 @@ public class RegisterActivity extends Activity {
 	String name, username, email, password;
 	Functions functions = new Functions();
 
-	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,19 +52,29 @@ public class RegisterActivity extends Activity {
 				functions.hideKeyboard(getApplicationContext(),
 						getCurrentFocus());
 				if (functions.isConnected(getApplicationContext())) {
-
+					registerName.setError(null);
+					registerUsername.setError(null);
+					registerEmail.setError(null);
+					registerPassword.setError(null);
 					name = registerName.getText().toString().trim();
 					username = registerUsername.getText().toString().trim();
 					email = registerEmail.getText().toString().trim();
 					password = registerPassword.getText().toString().trim();
 
-					if (name.isEmpty() || username.isEmpty() || email.isEmpty()
-							|| password.isEmpty()) {
+					if (name.isEmpty()) {
+						registerName.setError("Name Required");
+					}
+					if (username.isEmpty()) {
+						registerUsername.setError("Username Required");
+					}
+					if (email.isEmpty()) {
+						registerEmail.setError("Email Required");
+					}
+					if (password.isEmpty()) {
+						registerPassword.setError("Password Required");
+					}
 
-						Toast.makeText(getApplicationContext(),
-								"Enter all the details", Toast.LENGTH_SHORT)
-								.show();
-					} else {
+					else {
 						final ProgressDialog pDialog = new ProgressDialog(
 								RegisterActivity.this);
 						pDialog.setTitle("Please Wait");

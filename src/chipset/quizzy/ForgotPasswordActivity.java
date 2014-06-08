@@ -46,13 +46,12 @@ public class ForgotPasswordActivity extends Activity {
 						getCurrentFocus());
 				if (functions.isConnected(getApplicationContext())) {
 
+					forgotPasswordEmail.setError(null);
 					email = forgotPasswordEmail.getText().toString();
 
 					if (email.isEmpty()) {
 
-						Toast.makeText(getApplicationContext(),
-								"Enter a valid email", Toast.LENGTH_SHORT)
-								.show();
+						forgotPasswordEmail.setError("Email Required");
 					} else {
 						final ProgressDialog pDialog = new ProgressDialog(
 								ForgotPasswordActivity.this);
