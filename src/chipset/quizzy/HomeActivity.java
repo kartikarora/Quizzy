@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import chipset.quizzy.game.LetsPlayActivity;
 import chipset.quizzy.resources.Functions;
 
 import com.parse.ParseUser;
@@ -60,7 +61,7 @@ public class HomeActivity extends Activity {
 				ParseUser currentUser = ParseUser.getCurrentUser();
 				if (currentUser != null) {
 					Intent toDash = new Intent(getApplication(),
-							DashActivity.class);
+							LetsPlayActivity.class);
 					toDash.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 							| Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					startActivity(toDash);

@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="16"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -31,32 +31,47 @@
         </activity>
         <activity
             android:name="chipset.quizzy.LoginActivity"
-            android:label="@string/login"
+            android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
             android:name="chipset.quizzy.RegisterActivity"
-            android:label="@string/register"
+            android:label="@string/title_activity_register"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
-            android:name="chipset.quizzy.DashActivity"
-            android:label="@string/lp"
+            android:name="chipset.quizzy.game.LetsPlayActivity"
+            android:label="@string/title_activity_lets_play"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
             android:name="chipset.quizzy.ForgotPasswordActivity"
-            android:label="@string/login"
+            android:label="@string/title_activity_forgot_password"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
-            android:name="chipset.quizzy.menu.SettingsActivity"
-            android:label="@string/settings"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+            android:name="chipset.quizzy.game.QuestionActivity"
+            android:label="@string/title_activity_question"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name="chipset.quizzy.resources.ShowImageActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="chipset.quizzy.game.LevelTransitionActivity"
+            android:label="@string/title_activity_level_transition"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name="chipset.quizzy.game.LeaderboardActivity"
+            android:label="@string/title_activity_leaderboard"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
     </application>
 

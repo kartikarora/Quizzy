@@ -24,8 +24,6 @@ public class ForgotPasswordActivity extends Activity {
 	String email;
 	Functions functions = new Functions();
 
-	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -93,6 +91,7 @@ public class ForgotPasswordActivity extends Activity {
 								});
 					}
 				} else {
+					setContentView(R.layout.no_connection);
 					Toast.makeText(getApplicationContext(),
 							"No Internet Connection", Toast.LENGTH_SHORT)
 							.show();

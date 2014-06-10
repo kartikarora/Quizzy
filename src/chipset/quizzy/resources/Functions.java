@@ -90,5 +90,7 @@ public class Functions {
 				| Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		ParseUser.logOut();
 		context.startActivity(toHome);
+
 	}
+
 }

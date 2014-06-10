@@ -1,10 +1,11 @@
 package chipset.quizzy;
 
-import static chipset.quizzy.resources.Constants.KEY_NAME;
+import static chipset.quizzy.resources.Constants.*;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,7 @@ public class RegisterActivity extends Activity {
 
 	EditText registerName, registerUsername, registerEmail, registerPassword;
 	Button registerDo, resetDo, loginIntent;
-	String name, username, email, password;
+	String name, username, email, password, model;
 	Functions functions = new Functions();
 
 	@Override
@@ -83,11 +84,15 @@ public class RegisterActivity extends Activity {
 						pDialog.setIndeterminate(false);
 						pDialog.show();
 
+						model = Build.MANUFACTURER + " " + Build.MODEL;
 						ParseUser user = new ParseUser();
 						user.put(KEY_NAME, name);
 						user.setUsername(username);
 						user.setPassword(password);
 						user.setEmail(email);
+						user.put(KEY_ADMIN, 0);
+						user.put(KEY_LAST_LEVEL, -1);
+						user.put(KEY_DEVICE, model);
 						user.signUpInBackground(new SignUpCallback() {
 							public void done(ParseException e) {
 								if (e == null) {
@@ -115,6 +120,7 @@ public class RegisterActivity extends Activity {
 
 					}
 				} else {
+					setContentView(R.layout.no_connection);
 					Toast.makeText(getApplicationContext(),
 							"No Internet Connection", Toast.LENGTH_SHORT)
 							.show();

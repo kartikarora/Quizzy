@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/turquoize" >
+
+    <TextView
+        android:id="@+id/levelSwitchNumberFrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/number"
+        android:textColor="@color/clouds"
+        android:textSize="150sp" />
+
+    <TextView
+        android:id="@+id/levelSwitchNumberTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/number"
+        android:textColor="@color/clouds"
+        android:textSize="150sp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/levelSwitchDo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/levelSwitchNumberTo"
+        android:layout_margin="15dp"
+        android:background="@drawable/button_click"
+        android:gravity="center"
+        android:text="@string/nextLevel"
+        android:textColor="@color/turquoize"
+        android:visibility="gone" />
+
+</RelativeLayout>

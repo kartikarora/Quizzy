@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import chipset.quizzy.game.LetsPlayActivity;
 import chipset.quizzy.resources.Functions;
 
 import com.parse.LogInCallback;
@@ -91,7 +92,7 @@ public class LoginActivity extends Activity {
 											if (emailVerified == true) {
 												Intent toDash = new Intent(
 														getApplication(),
-														DashActivity.class);
+														LetsPlayActivity.class);
 												Toast.makeText(
 														getApplicationContext(),
 														"Logged In Successfully",
@@ -126,6 +127,7 @@ public class LoginActivity extends Activity {
 								});
 					}
 				} else {
+					setContentView(R.layout.no_connection);
 					Toast.makeText(getApplicationContext(),
 							"No Internet Connection", Toast.LENGTH_SHORT)
 							.show();
