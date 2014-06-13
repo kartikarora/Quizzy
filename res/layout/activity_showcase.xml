@@ -1,33 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/turquoize" >
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:id="@+id/appshow1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:layout_margin="15dp"
         android:gravity="center"
-        android:text="@string/allDone"
+        android:text="@string/appshow"
         android:textColor="@color/clouds"
         android:textSize="30sp"
         android:textStyle="italic" />
 
     <Button
-        android:id="@+id/shareProgressDone"
+        android:id="@+id/c"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="15dp"
         android:background="@drawable/button_click"
-        android:drawableLeft="@drawable/ic_action_share"
         android:gravity="center"
-        android:text="@string/share"
+        android:text="@string/c"
         android:textColor="@color/turquoize" />
 
 </RelativeLayout>

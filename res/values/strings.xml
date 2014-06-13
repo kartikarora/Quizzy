@@ -27,13 +27,16 @@
     <string name="submit">SUBMIT ANSWER</string>
     <string name="image">image</string>
     <string name="IA">INCORRECT ANSWER</string>
+    <string name="leaderboardDo">VIEW LEADERBOARD</string>
     <string name="number">number</string>
     <string name="CA">CORRECT ANSWER</string>
     <string name="noconn">No Internet Connection</string>
     <string name="nextLevel">CONTINUE TO NEXT LEVEL</string>
     <string name="hint">Hint</string>
     <string name="leaderboard">Leaderboard</string>
-    <string name="str">(Swipe Down To Refresh)</string>
+    <string name="share">SHARE YOUR ACHIEVEMENT</string>
+    <string name="appshow">This tutorial will guide you through different parts of Quizzy!</string>
+    <string name="c">CONTINUE</string>
     <string name="allDone">Congratulations, you\'ve completed all Levels\nYou will be notified when new levels are available!\n\nThank you for playing Quizzy</string>
 
     <!-- Activity Titles -->
@@ -45,14 +48,14 @@
     <string name="title_activity_leaderboard">Leaderboard</string>
     <string name="title_activity_question">Questions</string>
     <string name="title_activity_level_transition">Level Transition</string>
-
-    <string-array name="lol">
-        <item>a</item>
-        <item>b</item>
-        <item>c</item>
-        <item>d</item>
-        <item>e</item>
-        <item>f</item>
+    <string name="title_activity_showcase">Quizzy Tutorial</string>
+    
+    <string-array name="sampleNames">
+        <item>This is the leaderboard for Quizzy</item>
+        <item>This list will show you who\'s at the top.</item>
+        <item>You can click any name to view more details</item>
+        <item>You can swipe down to refresh the list</item>
+        <item>Click any of the list items to continue</item>
     </string-array>
 
 </resources>

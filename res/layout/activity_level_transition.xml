@@ -8,32 +8,103 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="@string/number"
         android:textColor="@color/clouds"
-        android:textSize="150sp" />
+        android:textSize="200sp" />
 
     <TextView
         android:id="@+id/levelSwitchNumberTo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="@string/number"
         android:textColor="@color/clouds"
-        android:textSize="150sp"
-        android:visibility="gone" />
+        android:textSize="200sp" />
 
-    <Button
-        android:id="@+id/levelSwitchDo"
+    <RelativeLayout
+        android:id="@+id/theBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/levelSwitchNumberTo"
-        android:layout_margin="15dp"
-        android:background="@drawable/button_click"
-        android:gravity="center"
-        android:text="@string/nextLevel"
-        android:textColor="@color/turquoize"
-        android:visibility="gone" />
+        android:layout_centerInParent="true"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:id="@+id/toFromSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/levelSwitchNumberFromSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="100dp"
+                android:gravity="right"
+                android:text="@string/number"
+                android:textColor="@color/clouds"
+                android:textSize="70sp" />
+
+            <ImageView
+                android:id="@+id/to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/number"
+                android:src="@drawable/ic_to" />
+
+            <TextView
+                android:id="@+id/levelSwitchNumberToSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="100dp"
+                android:gravity="left"
+                android:text="@string/number"
+                android:textColor="@color/clouds"
+                android:textSize="70sp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/levelSwitchDo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toFromSmall"
+            android:layout_margin="15dp"
+            android:background="@drawable/button_click"
+            android:gravity="center"
+            android:text="@string/nextLevel"
+            android:textColor="@color/turquoize" />
+
+        <Button
+            android:id="@+id/leaderboardDo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/levelSwitchDo"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"
+            android:background="@drawable/button_click"
+            android:gravity="center"
+            android:text="@string/leaderboardDo"
+            android:textColor="@color/turquoize" />
+
+        <Button
+            android:id="@+id/shareProgressDo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/leaderboardDo"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"
+            android:background="@drawable/button_click"
+            android:drawableLeft="@drawable/ic_action_share"
+            android:gravity="center"
+            android:text="@string/share"
+            android:textColor="@color/turquoize" />
+    </RelativeLayout>
 
 </RelativeLayout>

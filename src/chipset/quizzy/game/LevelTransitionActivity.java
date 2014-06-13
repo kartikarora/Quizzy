@@ -14,13 +14,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import chipset.quizzy.R;
 
 public class LevelTransitionActivity extends Activity {
 
-	TextView levelFrom, levelTo;
-	Button switchLevel;
+	TextView levelFrom, levelTo, levelFromSmall, levelToSmall;
+	Button switchLevel, shareProgress, leaderboardDo;
+	RelativeLayout theBox;
 	int levelNumber;
 
 	@Override
@@ -32,9 +34,16 @@ public class LevelTransitionActivity extends Activity {
 		levelFrom = (TextView) findViewById(R.id.levelSwitchNumberFrom);
 		levelTo = (TextView) findViewById(R.id.levelSwitchNumberTo);
 		switchLevel = (Button) findViewById(R.id.levelSwitchDo);
+		shareProgress = (Button) findViewById(R.id.shareProgressDo);
+		leaderboardDo = (Button) findViewById(R.id.leaderboardDo);
+		levelFromSmall = (TextView) findViewById(R.id.levelSwitchNumberFromSmall);
+		levelToSmall = (TextView) findViewById(R.id.levelSwitchNumberToSmall);
+		theBox = (RelativeLayout) findViewById(R.id.theBox);
 
 		levelFrom.setText(String.valueOf(levelNumber));
 		levelTo.setText(String.valueOf(levelNumber + 1));
+		levelFromSmall.setText(String.valueOf(levelNumber));
+		levelToSmall.setText(String.valueOf(levelNumber + 1));
 
 		levelTo.setRotationY(-90f);
 
@@ -43,19 +52,23 @@ public class LevelTransitionActivity extends Activity {
 
 		ObjectAnimator visToInvis = ObjectAnimator.ofFloat(levelFrom,
 				"rotationY", 0f, 90f);
-		visToInvis.setDuration(1000);
+		visToInvis.setDuration(800);
 		visToInvis.setInterpolator(accelerator);
 		final ObjectAnimator invisToVis = ObjectAnimator.ofFloat(levelTo,
 				"rotationY", -90f, 0f);
-		invisToVis.setDuration(1000);
+		invisToVis.setDuration(800);
 		invisToVis.setInterpolator(decelerator);
 		invisToVis.addListener(new AnimatorListenerAdapter() {
 			@Override
 			public void onAnimationEnd(Animator anim) {
 				Animation animFadeIn = AnimationUtils.loadAnimation(
 						getApplicationContext(), R.anim.animation_fade_in);
-				switchLevel.setVisibility(View.VISIBLE);
-				switchLevel.startAnimation(animFadeIn);
+				Animation animFadeOut = AnimationUtils.loadAnimation(
+						getApplicationContext(), R.anim.animation_fade_out);
+				levelTo.startAnimation(animFadeOut);
+				theBox.setVisibility(View.VISIBLE);
+				theBox.startAnimation(animFadeIn);
+
 			}
 		});
 		visToInvis.addListener(new AnimatorListenerAdapter() {
@@ -82,6 +95,34 @@ public class LevelTransitionActivity extends Activity {
 			}
 		});
 
-	}
+		shareProgress.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View arg0) {
+				Intent share = new Intent(Intent.ACTION_SEND);
+				share.setType("text/plain");
+				share.putExtra(
+						Intent.EXTRA_TEXT,
+						"I just completed Level "
+								+ String.valueOf(levelNumber)
+								+ " and reached Level "
+								+ String.valueOf(levelNumber + 1)
+								+ " on Quizzy!\n\n"
+								+ "Learn new things on Quizzy!\nhttps://play.google.com/store/apps/details?id=chipset.quizzy");
+				startActivity(share);
+
+			}
+		});
+
+		leaderboardDo.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				startActivity(new Intent(getApplication(),
+						LeaderboardActivity.class));
+
+			}
+		});
+
+	}
 }

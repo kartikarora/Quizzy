@@ -90,19 +90,20 @@ public class LoginActivity extends Activity {
 											boolean emailVerified = (Boolean) currentUser
 													.get("emailVerified");
 											if (emailVerified == true) {
-												Intent toDash = new Intent(
-														getApplication(),
-														LetsPlayActivity.class);
+
 												Toast.makeText(
 														getApplicationContext(),
 														"Logged In Successfully",
 														Toast.LENGTH_SHORT)
 														.show();
-												// Close all views before
-												// launching
-												toDash.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-														| Intent.FLAG_ACTIVITY_CLEAR_TASK);
-												startActivity(toDash);
+
+												Intent toLetsPlay = new Intent(
+														getApplication(),
+														LetsPlayActivity.class);
+												toLetsPlay
+														.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+																| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+												startActivity(toLetsPlay);
 
 											} else {
 												AlertDialog.Builder builder = new AlertDialog.Builder(

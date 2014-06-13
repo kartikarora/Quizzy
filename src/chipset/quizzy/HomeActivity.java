@@ -14,18 +14,19 @@ import android.widget.TextView;
 import chipset.quizzy.game.LetsPlayActivity;
 import chipset.quizzy.resources.Functions;
 
+import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 
 public class HomeActivity extends Activity {
 
 	Functions functions = new Functions();
 
-	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+
+		ParseAnalytics.trackAppOpened(getIntent());
 		final LinearLayout layoutHome = (LinearLayout) findViewById(R.id.layoutHome);
 		layoutHome.setVisibility(View.GONE);
 
@@ -60,11 +61,13 @@ public class HomeActivity extends Activity {
 
 				ParseUser currentUser = ParseUser.getCurrentUser();
 				if (currentUser != null) {
-					Intent toDash = new Intent(getApplication(),
+
+					Intent toLetsPlay = new Intent(getApplication(),
 							LetsPlayActivity.class);
-					toDash.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+					toLetsPlay.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 							| Intent.FLAG_ACTIVITY_CLEAR_TASK);
-					startActivity(toDash);
+					startActivity(toLetsPlay);
+
 				} else {
 					TextView homeTitle = (TextView) findViewById(R.id.homeTitle);
 					Animation animMove = AnimationUtils.loadAnimation(

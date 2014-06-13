@@ -14,6 +14,7 @@ public class Constants {
 	public static String KEY_EMAIL = "email";
 	public static String KEY_PASSWORD = "password";
 	public static String KEY_ADMIN = "admin";
+	public static String KEY_EMAIL_VERFIFIED = "emailVerified";
 	public static String KEY_QUESTION_NUMBER = "questionNumber";
 	public static String KEY_QUESTION = "question";
 	public static String KEY_QUESTION_ANSWER = "questionAnswer";
@@ -24,5 +25,9 @@ public class Constants {
 	public static String KEY_LAST_LEVEL = "lastLevel";
 	public static String KEY_DEVICE = "device";
 	public static String KEY_UPDATED_AT = "updatedAt";
+
+	// PREFS
+
+	public static String PREFS_FIRST_RUN = "firstRunCheck";
 
 }

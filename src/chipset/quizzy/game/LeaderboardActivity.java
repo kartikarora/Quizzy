@@ -1,6 +1,6 @@
 package chipset.quizzy.game;
 
-import static chipset.quizzy.resources.Constants.KEY_ADMIN;
+import static chipset.quizzy.resources.Constants.*;
 import static chipset.quizzy.resources.Constants.KEY_DEVICE;
 import static chipset.quizzy.resources.Constants.KEY_LAST_LEVEL;
 import static chipset.quizzy.resources.Constants.KEY_NAME;
@@ -101,7 +101,7 @@ public class LeaderboardActivity extends Activity {
 		ParseQuery<ParseUser> query = ParseUser.getQuery();
 		query.addDescendingOrder(KEY_LAST_LEVEL);
 		query.addAscendingOrder(KEY_UPDATED_AT);
-
+		query.whereEqualTo(KEY_EMAIL_VERFIFIED, true);
 		query.whereNotEqualTo(KEY_ADMIN, 1);
 		query.findInBackground(new FindCallback<ParseUser>() {
 
@@ -125,21 +125,25 @@ public class LeaderboardActivity extends Activity {
 										View view, int position, long id) {
 									ParseUser clickedUser = users.get(position);
 									int lastLevel;
-									String name, message, username, device;
+									String name, message, username, device, ll, at;
 									Date crossedAt;
 									username = clickedUser.getUsername();
 									name = clickedUser.getString(KEY_NAME);
-									lastLevel = clickedUser
-											.getInt(KEY_LAST_LEVEL);
 									crossedAt = clickedUser.getUpdatedAt();
 									device = clickedUser.getString(KEY_DEVICE);
+									lastLevel = clickedUser
+											.getInt(KEY_LAST_LEVEL);
+									ll = String.valueOf(lastLevel);
+									at = "At";
+									if (lastLevel < 1) {
+										ll = "Not Played Yet";
+										at = "Joined On:";
+									}
 									message = "Name: " + name
-											+ "\nLast Level Completed: "
-											+ String.valueOf(lastLevel)
-											+ "\nAt: "
+											+ "\nLast Level Completed: " + ll
+											+ "\n+" + at
 											+ String.valueOf(crossedAt)
 											+ "\nOn: " + device;
-
 									AlertDialog.Builder builder = new AlertDialog.Builder(
 											LeaderboardActivity.this);
 									builder.setTitle("Username: " + username);

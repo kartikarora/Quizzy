@@ -1,8 +1,13 @@
 package chipset.quizzy;
 
-import static chipset.quizzy.resources.Constants.*;
+import static chipset.quizzy.resources.Constants.KEY_ADMIN;
+import static chipset.quizzy.resources.Constants.KEY_DEVICE;
+import static chipset.quizzy.resources.Constants.KEY_LAST_LEVEL;
+import static chipset.quizzy.resources.Constants.KEY_NAME;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -97,16 +102,31 @@ public class RegisterActivity extends Activity {
 							public void done(ParseException e) {
 								if (e == null) {
 									pDialog.dismiss();
-									Intent toLogin = new Intent(
-											getApplication(),
-											LoginActivity.class);
-									Toast.makeText(getApplicationContext(),
-											"Registered Successfully",
-											Toast.LENGTH_SHORT).show();
-									// Close all views before launching
-									toLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-											| Intent.FLAG_ACTIVITY_CLEAR_TASK);
-									startActivity(toLogin);
+
+									AlertDialog.Builder builder = new AlertDialog.Builder(
+											RegisterActivity.this);
+									builder.setTitle("Registered Successfully");
+									builder.setMessage("You've been sent an account verification link on you email. Please verify your account and then login");
+									builder.setCancelable(false);
+									builder.setNeutralButton(
+											android.R.string.ok,
+											new DialogInterface.OnClickListener() {
+
+												@Override
+												public void onClick(
+														DialogInterface arg0,
+														int arg1) {
+													// Close all views before
+													// launching
+													Intent toLogin = new Intent(
+															getApplication(),
+															LoginActivity.class);
+													toLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+															| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+													startActivity(toLogin);
+
+												}
+											});
 
 								} else {
 									pDialog.dismiss();

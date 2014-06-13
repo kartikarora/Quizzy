@@ -6,6 +6,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -90,6 +92,35 @@ public class Functions {
 				| Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		ParseUser.logOut();
 		context.startActivity(toHome);
+
+	}
+
+	/*
+	 * Function to put boolean SharedPrefrences data
+	 */
+
+	public void putSharedPrefs(Context context, String preferenceName,
+			boolean val) {
+		SharedPreferences pref = context
+				.getSharedPreferences(preferenceName, 0); // 0 - for private
+															// mode
+		Editor editor = pref.edit();
+		editor.clear();
+		editor.putBoolean(preferenceName, val);
+		editor.commit();
+	}
+
+	/*
+	 * Function to put boolean SharedPrefrences data
+	 */
+
+	public boolean getSharedPrefs(Context context, String preferenceName) {
+		SharedPreferences pref = context
+				.getSharedPreferences(preferenceName, 0); // 0 - for private
+															// mode
+
+		boolean val = pref.getBoolean(preferenceName, true);
+		return val;
 
 	}
 

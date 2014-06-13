@@ -3,6 +3,7 @@ package chipset.quizzy.game;
 import static chipset.quizzy.resources.Constants.KEY_ADMIN;
 import static chipset.quizzy.resources.Constants.KEY_LAST_LEVEL;
 import static chipset.quizzy.resources.Constants.KEY_NAME;
+import static chipset.quizzy.resources.Constants.PREFS_FIRST_RUN;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import chipset.quizzy.R;
 import chipset.quizzy.resources.Functions;
+import chipset.quizzy.showcase.ShowcaseActivity;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -39,17 +41,33 @@ public class LetsPlayActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lets_play);
 
-		getActionBar().setIcon(R.drawable.ic_launcher_activity);
-
-		currentUser = ParseUser.getCurrentUser();
-		if (currentUser != null) {
-			name = currentUser.getString(KEY_NAME);
-			admin = currentUser.getInt(KEY_ADMIN);
-		} else {
-			functions.logout(getApplication(), getApplicationContext());
+		if (functions.getSharedPrefs(getApplicationContext(), PREFS_FIRST_RUN) == true) {
+			startActivity(new Intent(getApplication(), ShowcaseActivity.class)
+					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+							| Intent.FLAG_ACTIVITY_NEW_TASK));
 		}
 
-		ParseUser.getCurrentUser().refreshInBackground(new RefreshCallback() {
+		getActionBar().setIcon(R.drawable.ic_launcher_activity);
+
+		welcomeTitle = (TextView) findViewById(R.id.welcomeTitle);
+		lastLevel = (TextView) findViewById(R.id.lastLevel);
+		letsPlayBox = (LinearLayout) findViewById(R.id.letsPlayBox);
+		letsPlayDo = (Button) findViewById(R.id.letsPlayDo);
+
+		currentUser = ParseUser.getCurrentUser();
+
+		name = currentUser.getString(KEY_NAME);
+		admin = currentUser.getInt(KEY_ADMIN);
+
+		welcomeTitle.setText("Hi " + name + "!\nWelcome to Quizzy");
+
+		if (admin == 1) {
+			TextView adminText = (TextView) findViewById(R.id.adminText);
+			adminText.setVisibility(View.VISIBLE);
+
+		}
+
+		currentUser.refreshInBackground(new RefreshCallback() {
 
 			@Override
 			public void done(ParseObject object, ParseException e) {
@@ -61,19 +79,6 @@ public class LetsPlayActivity extends Activity {
 
 			}
 		});
-
-		welcomeTitle = (TextView) findViewById(R.id.welcomeTitle);
-		lastLevel = (TextView) findViewById(R.id.lastLevel);
-		letsPlayBox = (LinearLayout) findViewById(R.id.letsPlayBox);
-		letsPlayDo = (Button) findViewById(R.id.letsPlayDo);
-
-		welcomeTitle.setText("Hi " + name + "!\nWelcome to Quizzy");
-
-		if (admin == 1) {
-			TextView adminText = (TextView) findViewById(R.id.adminText);
-			adminText.setVisibility(View.VISIBLE);
-
-		}
 
 		new Handler().postDelayed(new Runnable() {
 
@@ -98,7 +103,15 @@ public class LetsPlayActivity extends Activity {
 					if (lastLevelCleared < 1) {
 						lastLevelCleared = 0;
 
-						lastLevel.setText("Start Playing");
+						lastLevel.setText("First Question Is Ready");
+
+						/*
+						 * if (functions.getSharedPrefs(getApplicationContext(),
+						 * PREFS_FIRST_RUN) == true) {
+						 * functions.putSharedPrefs(getApplicationContext(),
+						 * PREFS_FIRST_RUN, false);
+						 * lastLevel.setText("Your firstquestion "); }
+						 */
 					} else {
 						lastLevel.setText("Last Level Cleared : "
 								+ String.valueOf(lastLevelCleared));

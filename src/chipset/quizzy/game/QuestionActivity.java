@@ -81,6 +81,20 @@ public class QuestionActivity extends Activity {
 					if (object == null) {
 						pDialog.dismiss();
 						setContentView(R.layout.all_done);
+						Button shareProgress = (Button) findViewById(R.id.shareProgressDone);
+						shareProgress.setOnClickListener(new OnClickListener() {
+
+							@Override
+							public void onClick(View arg0) {
+								Intent share = new Intent(Intent.ACTION_SEND);
+								share.setType("text/plain");
+								share.putExtra(
+										Intent.EXTRA_TEXT,
+										"I have completed all the levels on Quizzy and looking forward to new Questions!\n\nLearn new things on Quizzy, https://play.google.com/store/apps/details?id=chipset.quizzy");
+								startActivity(share);
+
+							}
+						});
 					} else {
 						pDialog.dismiss();
 						playQuestion = (TextView) findViewById(R.id.playQuestion);
