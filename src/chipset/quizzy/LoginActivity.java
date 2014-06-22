@@ -75,7 +75,7 @@ public class LoginActivity extends Activity {
 								LoginActivity.this);
 						pDialog.setTitle("Please Wait");
 						pDialog.setCancelable(false);
-						pDialog.setMessage("Logggin In...");
+						pDialog.setMessage("Logging In...");
 						pDialog.setIndeterminate(false);
 						pDialog.show();
 

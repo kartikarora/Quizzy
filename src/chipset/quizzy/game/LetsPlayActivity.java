@@ -1,10 +1,18 @@
 package chipset.quizzy.game;
 
 import static chipset.quizzy.resources.Constants.KEY_ADMIN;
+import static chipset.quizzy.resources.Constants.KEY_CROSSED_AT;
+import static chipset.quizzy.resources.Constants.KEY_DEVICE;
 import static chipset.quizzy.resources.Constants.KEY_LAST_LEVEL;
 import static chipset.quizzy.resources.Constants.KEY_NAME;
+import static chipset.quizzy.resources.Constants.KEY_RANK;
+import static chipset.quizzy.resources.Constants.KEY_USERNAME;
 import static chipset.quizzy.resources.Constants.PREFS_FIRST_RUN;
+
+import java.util.Date;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,108 +38,100 @@ public class LetsPlayActivity extends Activity {
 
 	Functions functions = new Functions();
 	String name;
-	int admin, lastLevelCleared;
+	boolean admin;
+	int lastLevelCleared;
 	TextView lastLevel, welcomeTitle;
 	LinearLayout letsPlayBox;
 	Button letsPlayDo;
-	ParseUser currentUser;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lets_play);
 
-		if (functions.getSharedPrefs(getApplicationContext(), PREFS_FIRST_RUN) == true) {
-			startActivity(new Intent(getApplication(), ShowcaseActivity.class)
-					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
-							| Intent.FLAG_ACTIVITY_NEW_TASK));
-		}
-
 		getActionBar().setIcon(R.drawable.ic_launcher_activity);
 
-		welcomeTitle = (TextView) findViewById(R.id.welcomeTitle);
-		lastLevel = (TextView) findViewById(R.id.lastLevel);
-		letsPlayBox = (LinearLayout) findViewById(R.id.letsPlayBox);
-		letsPlayDo = (Button) findViewById(R.id.letsPlayDo);
-
-		currentUser = ParseUser.getCurrentUser();
-
-		name = currentUser.getString(KEY_NAME);
-		admin = currentUser.getInt(KEY_ADMIN);
-
-		welcomeTitle.setText("Hi " + name + "!\nWelcome to Quizzy");
-
-		if (admin == 1) {
-			TextView adminText = (TextView) findViewById(R.id.adminText);
-			adminText.setVisibility(View.VISIBLE);
-
-		}
-
-		currentUser.refreshInBackground(new RefreshCallback() {
+		ParseUser.getCurrentUser().refreshInBackground(new RefreshCallback() {
 
 			@Override
 			public void done(ParseObject object, ParseException e) {
 				if (e == null) {
+					if (object.getBoolean(PREFS_FIRST_RUN) == true) {
+						startActivity(new Intent(getApplication(),
+								ShowcaseActivity.class)
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+										| Intent.FLAG_ACTIVITY_NEW_TASK));
+					}
 					lastLevelCleared = object.getInt(KEY_LAST_LEVEL);
+					welcomeTitle = (TextView) findViewById(R.id.welcomeTitle);
+					lastLevel = (TextView) findViewById(R.id.lastLevel);
+					letsPlayBox = (LinearLayout) findViewById(R.id.letsPlayBox);
+					letsPlayDo = (Button) findViewById(R.id.letsPlayDo);
+
+					name = object.getString(KEY_NAME);
+					admin = object.getBoolean(KEY_ADMIN);
+
+					welcomeTitle.setText("Hi " + name + "!\nWelcome to Quizzy");
+					functions.updateLeaderboard(getApplicationContext());
+					if (admin == true) {
+						TextView adminText = (TextView) findViewById(R.id.adminText);
+						adminText.setVisibility(View.VISIBLE);
+
+					}
+
+					new Handler().postDelayed(new Runnable() {
+
+						@Override
+						public void run() {
+							Animation animSlideUpDisappear = AnimationUtils
+									.loadAnimation(getApplicationContext(),
+											R.anim.animation_slide_up_disappear);
+							welcomeTitle.startAnimation(animSlideUpDisappear);
+							Animation animSlideUpAppear = AnimationUtils
+									.loadAnimation(getApplicationContext(),
+											R.anim.animation_slide_up_appear);
+							letsPlayBox.setVisibility(View.VISIBLE);
+							letsPlayBox.startAnimation(animSlideUpAppear);
+
+							if (!functions.isConnected(getApplicationContext())) {
+
+								setContentView(R.layout.no_connection);
+
+							} else {
+
+								if (lastLevelCleared < 1) {
+									lastLevelCleared = 0;
+
+									lastLevel
+											.setText("First Question Is Ready");
+
+								} else {
+									lastLevel.setText("Last Level Cleared : "
+											+ String.valueOf(lastLevelCleared));
+								}
+								letsPlayDo.setVisibility(View.VISIBLE);
+
+							}
+						}
+					}, 2000); // wait for 2 seconds
+
+					letsPlayDo.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View arg0) {
+							Intent toQuestion = new Intent(getApplication(),
+									QuestionActivity.class);
+							toQuestion.putExtra(KEY_LAST_LEVEL,
+									lastLevelCleared);
+							toQuestion.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+									| Intent.FLAG_ACTIVITY_NEW_TASK);
+							startActivity(toQuestion);
+
+						}
+					});
 				} else {
 					functions.logout(getApplication(), getApplicationContext());
 				}
-
-			}
-		});
-
-		new Handler().postDelayed(new Runnable() {
-
-			@Override
-			public void run() {
-				Animation animSlideUpDisappear = AnimationUtils.loadAnimation(
-						getApplicationContext(),
-						R.anim.animation_slide_up_disappear);
-				welcomeTitle.startAnimation(animSlideUpDisappear);
-				Animation animSlideUpAppear = AnimationUtils.loadAnimation(
-						getApplicationContext(),
-						R.anim.animation_slide_up_appear);
-				letsPlayBox.setVisibility(View.VISIBLE);
-				letsPlayBox.startAnimation(animSlideUpAppear);
-
-				if (!functions.isConnected(getApplicationContext())) {
-
-					setContentView(R.layout.no_connection);
-
-				} else {
-
-					if (lastLevelCleared < 1) {
-						lastLevelCleared = 0;
-
-						lastLevel.setText("First Question Is Ready");
-
-						/*
-						 * if (functions.getSharedPrefs(getApplicationContext(),
-						 * PREFS_FIRST_RUN) == true) {
-						 * functions.putSharedPrefs(getApplicationContext(),
-						 * PREFS_FIRST_RUN, false);
-						 * lastLevel.setText("Your firstquestion "); }
-						 */
-					} else {
-						lastLevel.setText("Last Level Cleared : "
-								+ String.valueOf(lastLevelCleared));
-					}
-					letsPlayDo.setVisibility(View.VISIBLE);
-
-				}
-			}
-		}, 2000); // wait for 2 seconds
-
-		letsPlayDo.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				Intent toQuestion = new Intent(getApplication(),
-						QuestionActivity.class);
-				toQuestion.putExtra(KEY_LAST_LEVEL, lastLevelCleared);
-				toQuestion.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
-						| Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(toQuestion);
 
 			}
 		});
@@ -160,8 +160,62 @@ public class LetsPlayActivity extends Activity {
 			startActivity(new Intent(getApplication(),
 					LeaderboardActivity.class));
 
+		} else if (id == R.id.action_my_details) {
+			ParseUser.getCurrentUser().refreshInBackground(
+					new RefreshCallback() {
+
+						@Override
+						public void done(ParseObject user, ParseException e) {
+							if (e == null) {
+								int lastLevel, rank;
+								String name, message, username, device, ll, at;
+								Date crossedAt;
+								username = user.getString(KEY_USERNAME);
+								name = user.getString(KEY_NAME);
+								crossedAt = user.getDate(KEY_CROSSED_AT);
+								device = user.getString(KEY_DEVICE);
+								lastLevel = user.getInt(KEY_LAST_LEVEL);
+								rank = user.getInt(KEY_RANK);
+								ll = String.valueOf(lastLevel);
+								at = "At: ";
+								if (lastLevel < 1) {
+									ll = "Not Played Yet";
+									at = "Joined On:";
+								}
+								message = "Name: " + name + "\nUsername: "
+										+ username + "\nLast Level Completed: "
+										+ ll + "\n" + at
+										+ String.valueOf(crossedAt) + "\nOn: "
+										+ device + "\nRank: "
+										+ String.valueOf(rank);
+								AlertDialog.Builder builder = new AlertDialog.Builder(
+										LetsPlayActivity.this);
+								builder.setCancelable(false);
+								builder.setTitle(R.string.my_details);
+								builder.setMessage(message);
+								builder.setNeutralButton(android.R.string.ok,
+										null);
+								builder.create();
+								builder.show();
+
+							}
+
+						}
+					});
+
+		} else if (id == R.id.action_rules) {
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					LetsPlayActivity.this);
+			builder.setCancelable(false);
+			builder.setTitle(R.string.rules);
+			builder.setMessage(R.string.rulesMessage);
+			builder.setNeutralButton(android.R.string.ok, null);
+			builder.create();
+			builder.show();
+
 		}
 		return super.onOptionsItemSelected(item);
-	}
 
+	}
 }

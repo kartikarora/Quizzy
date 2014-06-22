@@ -1,5 +1,14 @@
 package chipset.quizzy.resources;
 
+import static chipset.quizzy.resources.Constants.KEY_ADMIN;
+import static chipset.quizzy.resources.Constants.KEY_CROSSED_AT;
+import static chipset.quizzy.resources.Constants.KEY_EMAIL_VERFIFIED;
+import static chipset.quizzy.resources.Constants.KEY_LAST_LEVEL;
+import static chipset.quizzy.resources.Constants.KEY_RANK;
+import static chipset.quizzy.resources.Constants.KEY_USER_CLASS;
+
+import java.util.List;
+
 import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -13,11 +22,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 import chipset.quizzy.HomeActivity;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class Functions {
 
@@ -124,4 +140,43 @@ public class Functions {
 
 	}
 
+	/*
+	 * Function to update leaderboard
+	 */
+	public void updateLeaderboard(final Context context) {
+		Log.d("Leaderboard ", "Updating");
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(KEY_USER_CLASS);
+		query.addDescendingOrder(KEY_LAST_LEVEL);
+		query.addAscendingOrder(KEY_CROSSED_AT);
+		query.whereNotEqualTo(KEY_ADMIN, true);
+		query.whereEqualTo(KEY_EMAIL_VERFIFIED, true);
+		query.findInBackground(new FindCallback<ParseObject>() {
+
+			@Override
+			public void done(List<ParseObject> users, ParseException e) {
+				for (int i = 0; i < users.size(); i++) {
+					ParseObject user = users.get(i);
+					Log.d("Leaderboard ",
+							"Updating user " + String.valueOf(i + 1));
+					user.put(KEY_RANK, i + 1);
+					user.saveInBackground(new SaveCallback() {
+
+						@Override
+						public void done(ParseException e) {
+							if (e == null) {
+								Log.d("Leader", "Saved");
+							} else {
+								Toast.makeText(context, e.getMessage(),
+										Toast.LENGTH_SHORT).show();
+							}
+
+						}
+					});
+				}
+
+			}
+		});
+
+		Log.d("Leaderboard ", "Closing");
+	}
 }

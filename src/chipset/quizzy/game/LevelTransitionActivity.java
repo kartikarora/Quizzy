@@ -52,11 +52,11 @@ public class LevelTransitionActivity extends Activity {
 
 		ObjectAnimator visToInvis = ObjectAnimator.ofFloat(levelFrom,
 				"rotationY", 0f, 90f);
-		visToInvis.setDuration(800);
+		visToInvis.setDuration(1000);
 		visToInvis.setInterpolator(accelerator);
 		final ObjectAnimator invisToVis = ObjectAnimator.ofFloat(levelTo,
 				"rotationY", -90f, 0f);
-		invisToVis.setDuration(800);
+		invisToVis.setDuration(1000);
 		invisToVis.setInterpolator(decelerator);
 		invisToVis.addListener(new AnimatorListenerAdapter() {
 			@Override

@@ -1,9 +1,15 @@
 package chipset.quizzy;
 
 import static chipset.quizzy.resources.Constants.KEY_ADMIN;
+import static chipset.quizzy.resources.Constants.KEY_CROSSED_AT;
 import static chipset.quizzy.resources.Constants.KEY_DEVICE;
 import static chipset.quizzy.resources.Constants.KEY_LAST_LEVEL;
 import static chipset.quizzy.resources.Constants.KEY_NAME;
+import static chipset.quizzy.resources.Constants.KEY_RANK;
+import static chipset.quizzy.resources.Constants.PREFS_FIRST_RUN;
+
+import java.util.Date;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -95,9 +101,12 @@ public class RegisterActivity extends Activity {
 						user.setUsername(username);
 						user.setPassword(password);
 						user.setEmail(email);
-						user.put(KEY_ADMIN, 0);
+						user.put(KEY_ADMIN, false);
 						user.put(KEY_LAST_LEVEL, -1);
 						user.put(KEY_DEVICE, model);
+						user.put(PREFS_FIRST_RUN, true);
+						user.put(KEY_RANK, 0);
+						user.put(KEY_CROSSED_AT,new Date());
 						user.signUpInBackground(new SignUpCallback() {
 							public void done(ParseException e) {
 								if (e == null) {
@@ -106,7 +115,7 @@ public class RegisterActivity extends Activity {
 									AlertDialog.Builder builder = new AlertDialog.Builder(
 											RegisterActivity.this);
 									builder.setTitle("Registered Successfully");
-									builder.setMessage("You've been sent an account verification link on you email. Please verify your account and then login");
+									builder.setMessage("You've been sent an account verification link on your email. Please verify your account and then login");
 									builder.setCancelable(false);
 									builder.setNeutralButton(
 											android.R.string.ok,
@@ -127,6 +136,8 @@ public class RegisterActivity extends Activity {
 
 												}
 											});
+									builder.create();
+									builder.show();
 
 								} else {
 									pDialog.dismiss();

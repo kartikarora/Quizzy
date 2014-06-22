@@ -27,6 +27,7 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.activity_home);
 
 		ParseAnalytics.trackAppOpened(getIntent());
+
 		final LinearLayout layoutHome = (LinearLayout) findViewById(R.id.layoutHome);
 		layoutHome.setVisibility(View.GONE);
 
@@ -61,7 +62,7 @@ public class HomeActivity extends Activity {
 
 				ParseUser currentUser = ParseUser.getCurrentUser();
 				if (currentUser != null) {
-
+					
 					Intent toLetsPlay = new Intent(getApplication(),
 							LetsPlayActivity.class);
 					toLetsPlay.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK

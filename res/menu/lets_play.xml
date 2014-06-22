@@ -8,8 +8,18 @@
         android:showAsAction="never"
         android:title="@string/leaderboard"/>
     <item
-        android:id="@+id/action_logout"
+        android:id="@+id/action_my_details"
         android:orderInCategory="101"
+        android:showAsAction="never"
+        android:title="@string/my_details"/>
+    <item
+        android:id="@+id/action_rules"
+        android:orderInCategory="102"
+        android:showAsAction="never"
+        android:title="@string/rules"/>
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="103"
         android:showAsAction="never"
         android:title="@string/logout"/>
 
