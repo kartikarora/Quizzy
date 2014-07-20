@@ -16,8 +16,8 @@
     <string name="forgotPasswordDo">SEND MAIL</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="registerIntent">Don\'t have an Account? Sign Up</string>
-    <string name="loginIntent">Already have an Account? Sign In</string>
+    <string name="registerIntent">Don\'t have an account? Sign Up</string>
+    <string name="loginIntent">Already have an account? Sign In</string>
     <string name="forgotPasswordIntent">Forgot Password?</string>
     <string name="hello_world">Hello world!</string>
     <string name="settings">Settings</string>

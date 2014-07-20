@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import chipset.quizzy.R;
+import chipset.quizzy.resources.Functions;
 
 public class LevelTransitionActivity extends Activity {
 
@@ -24,12 +25,13 @@ public class LevelTransitionActivity extends Activity {
 	Button switchLevel, shareProgress, leaderboardDo;
 	RelativeLayout theBox;
 	int levelNumber;
+	Functions functions = new Functions();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_level_transition);
-
+		functions.updateLeaderboard(getApplicationContext());
 		levelNumber = getIntent().getExtras().getInt(KEY_LAST_LEVEL);
 		levelFrom = (TextView) findViewById(R.id.levelSwitchNumberFrom);
 		levelTo = (TextView) findViewById(R.id.levelSwitchNumberTo);

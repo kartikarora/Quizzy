@@ -2,13 +2,17 @@ package chipset.quizzy.resources;
 
 import static chipset.quizzy.resources.Constants.KEY_ADMIN;
 import static chipset.quizzy.resources.Constants.KEY_CROSSED_AT;
-import static chipset.quizzy.resources.Constants.KEY_EMAIL_VERFIFIED;
+import static chipset.quizzy.resources.Constants.KEY_DEVICE;
 import static chipset.quizzy.resources.Constants.KEY_LAST_LEVEL;
+import static chipset.quizzy.resources.Constants.KEY_LEADER_CLASS;
+import static chipset.quizzy.resources.Constants.KEY_NAME;
 import static chipset.quizzy.resources.Constants.KEY_RANK;
-import static chipset.quizzy.resources.Constants.KEY_USER_CLASS;
+import static chipset.quizzy.resources.Constants.KEY_USERNAME;
 
+import java.util.Date;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -27,8 +31,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import chipset.quizzy.HomeActivity;
+import chipset.quizzy.R;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -145,38 +151,93 @@ public class Functions {
 	 */
 	public void updateLeaderboard(final Context context) {
 		Log.d("Leaderboard ", "Updating");
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(KEY_USER_CLASS);
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(KEY_LEADER_CLASS);
 		query.addDescendingOrder(KEY_LAST_LEVEL);
 		query.addAscendingOrder(KEY_CROSSED_AT);
 		query.whereNotEqualTo(KEY_ADMIN, true);
-		query.whereEqualTo(KEY_EMAIL_VERFIFIED, true);
 		query.findInBackground(new FindCallback<ParseObject>() {
 
 			@Override
 			public void done(List<ParseObject> users, ParseException e) {
-				for (int i = 0; i < users.size(); i++) {
-					ParseObject user = users.get(i);
-					Log.d("Leaderboard ",
-							"Updating user " + String.valueOf(i + 1));
-					user.put(KEY_RANK, i + 1);
-					user.saveInBackground(new SaveCallback() {
+				Log.d("Leaderboard ", "done() caled");
+				if (e == null) {
+					Log.d("Leaderboard ", "inside if");
 
-						@Override
-						public void done(ParseException e) {
-							if (e == null) {
-								Log.d("Leader", "Saved");
-							} else {
-								Toast.makeText(context, e.getMessage(),
-										Toast.LENGTH_SHORT).show();
+					for (int i = 0; i < users.size(); i++) {
+						ParseObject user = users.get(i);
+						Log.d("Leaderboard ",
+								"Updating user " + String.valueOf(i + 1));
+						user.put(KEY_RANK, i + 1);
+						user.saveInBackground(new SaveCallback() {
+
+							@Override
+							public void done(ParseException e) {
+								if (e == null) {
+									Log.d("Leader", "Saved");
+								} else {
+									Toast.makeText(context, e.getMessage(),
+											Toast.LENGTH_SHORT).show();
+								}
+
 							}
+						});
+					}
 
-						}
-					});
+				} else {
+					Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT)
+							.show();
+				}
+			}
+		});
+
+		Log.d("Leaderboard ", "Closing");
+	}
+
+	/*
+	 * Function to get current user details
+	 */
+	public void getMyDetails(final Context context) {
+		updateLeaderboard(context);
+		String username = ParseUser.getCurrentUser().getUsername();
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(KEY_LEADER_CLASS);
+		query.whereEqualTo(KEY_USERNAME, username);
+		query.getFirstInBackground(new GetCallback<ParseObject>() {
+
+			@Override
+			public void done(ParseObject user, ParseException e) {
+				if (e == null) {
+					int lastLevel, rank;
+					String name, message, username, device, ll, at;
+					Date crossedAt;
+					username = user.getString(KEY_USERNAME);
+					name = user.getString(KEY_NAME);
+					crossedAt = user.getDate(KEY_CROSSED_AT);
+					device = user.getString(KEY_DEVICE);
+					lastLevel = user.getInt(KEY_LAST_LEVEL);
+					rank = user.getInt(KEY_RANK);
+					ll = String.valueOf(lastLevel);
+					at = "At: ";
+					if (lastLevel < 1) {
+						ll = "Not Played Yet";
+						at = "Joined On:";
+					}
+					message = "Name: " + name + "\nUsername: " + username
+							+ "\nLast Level Completed: " + ll + "\n" + at
+							+ String.valueOf(crossedAt) + "\nOn: " + device
+							+ "\nRank: " + String.valueOf(rank);
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							context);
+
+					builder.setTitle(R.string.my_details);
+					builder.setMessage(message);
+					builder.setNeutralButton(android.R.string.ok, null);
+					builder.create();
+					builder.show();
+
 				}
 
 			}
 		});
 
-		Log.d("Leaderboard ", "Closing");
 	}
 }

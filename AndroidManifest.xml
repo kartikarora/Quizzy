@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="20" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -56,7 +56,11 @@
             android:name="chipset.quizzy.game.LetsPlayActivity"
             android:label="@string/title_activity_lets_play"
             android:screenOrientation="portrait"
+            android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="stateHidden|adjustPan" >
+            <meta-data
+                android:name="android.support.UI_OPTIONS"
+                android:value="splitActionBarWhenNarrow" />
         </activity>
         <activity
             android:name="chipset.quizzy.ForgotPasswordActivity"
@@ -67,7 +71,12 @@
         <activity
             android:name="chipset.quizzy.game.QuestionActivity"
             android:label="@string/title_activity_question"
+            android:screenOrientation="portrait"
+            android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="stateHidden|adjustPan" >
+            <meta-data
+                android:name="android.support.UI_OPTIONS"
+                android:value="splitActionBarWhenNarrow" />
         </activity>
         <activity
             android:name="chipset.quizzy.resources.ShowImageActivity"
@@ -76,6 +85,7 @@
         <activity
             android:name="chipset.quizzy.game.LevelTransitionActivity"
             android:label="@string/title_activity_level_transition"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
             android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
@@ -83,7 +93,11 @@
             android:name="chipset.quizzy.game.LeaderboardActivity"
             android:label="@string/title_activity_leaderboard"
             android:screenOrientation="portrait"
+            android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="stateHidden|adjustPan" >
+            <meta-data
+                android:name="android.support.UI_OPTIONS"
+                android:value="splitActionBarWhenNarrow" />
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -92,7 +106,11 @@
             android:name="chipset.quizzy.showcase.ShowcaseActivity"
             android:label="@string/title_activity_showcase"
             android:screenOrientation="portrait"
+            android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="stateHidden|adjustPan" >
+            <meta-data
+                android:name="android.support.UI_OPTIONS"
+                android:value="splitActionBarWhenNarrow" />
         </activity>
 
         <service android:name="com.parse.PushService" />

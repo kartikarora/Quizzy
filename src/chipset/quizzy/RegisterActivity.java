@@ -1,6 +1,6 @@
 package chipset.quizzy;
 
-import static chipset.quizzy.resources.Constants.KEY_ADMIN;
+import static chipset.quizzy.resources.Constants.*;
 import static chipset.quizzy.resources.Constants.KEY_CROSSED_AT;
 import static chipset.quizzy.resources.Constants.KEY_DEVICE;
 import static chipset.quizzy.resources.Constants.KEY_LAST_LEVEL;
@@ -27,6 +27,7 @@ import android.widget.Toast;
 import chipset.quizzy.resources.Functions;
 
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -106,12 +107,23 @@ public class RegisterActivity extends Activity {
 						user.put(KEY_DEVICE, model);
 						user.put(PREFS_FIRST_RUN, true);
 						user.put(KEY_RANK, 0);
-						user.put(KEY_CROSSED_AT,new Date());
+						user.put(KEY_CROSSED_AT, new Date());
 						user.signUpInBackground(new SignUpCallback() {
 							public void done(ParseException e) {
 								if (e == null) {
 									pDialog.dismiss();
 
+									ParseObject userInLeader = new ParseObject(
+											KEY_LEADER_CLASS);
+									userInLeader.put(KEY_NAME, name);
+									userInLeader.put(KEY_USERNAME, username);
+									userInLeader.put(KEY_LAST_LEVEL, -1);
+									userInLeader.put(KEY_DEVICE, model);
+									userInLeader.put(KEY_RANK, 0);
+									userInLeader.put(KEY_ADMIN, false);
+									userInLeader
+											.put(KEY_CROSSED_AT, new Date());
+									userInLeader.saveInBackground();
 									AlertDialog.Builder builder = new AlertDialog.Builder(
 											RegisterActivity.this);
 									builder.setTitle("Registered Successfully");
@@ -127,12 +139,9 @@ public class RegisterActivity extends Activity {
 														int arg1) {
 													// Close all views before
 													// launching
-													Intent toLogin = new Intent(
-															getApplication(),
-															LoginActivity.class);
-													toLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-															| Intent.FLAG_ACTIVITY_CLEAR_TASK);
-													startActivity(toLogin);
+													functions
+															.logout(getApplication(),
+																	getApplicationContext());
 
 												}
 											});

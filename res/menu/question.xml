@@ -4,23 +4,28 @@
 
     <item
         android:id="@+id/action_hint"
-        android:orderInCategory="100"
-        android:showAsAction="never"
+        android:icon="@drawable/ic_action_hint"
+        android:showAsAction="ifRoom"
         android:title="@string/hint"/>
     <item
         android:id="@+id/action_leaderboard"
-        android:orderInCategory="101"
-        android:showAsAction="never"
+        android:icon="@drawable/ic_action_leaderboard"
+        android:showAsAction="ifRoom"
         android:title="@string/leaderboard"/>
     <item
         android:id="@+id/action_my_details"
-        android:orderInCategory="102"
-        android:showAsAction="never"
+        android:icon="@drawable/ic_action_my_details"
+        android:showAsAction="ifRoom"
         android:title="@string/my_details"/>
     <item
+        android:id="@+id/action_rules"
+        android:icon="@drawable/ic_action_rules"
+        android:showAsAction="ifRoom"
+        android:title="@string/rules"/>
+    <item
         android:id="@+id/action_logout"
-        android:orderInCategory="103"
-        android:showAsAction="never"
+        android:icon="@drawable/ic_action_logout"
+        android:showAsAction="ifRoom"
         android:title="@string/logout"/>
 
 </menu>

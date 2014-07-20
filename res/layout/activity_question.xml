@@ -52,8 +52,35 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:background="@drawable/button_click"
+            android:drawableRight="@drawable/ic_submit"
             android:text="@string/submit"
             android:textColor="@color/turquoize" />
+
+        <Button
+            android:id="@+id/playSubmitW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_click_w"
+            android:clickable="false"
+            android:enabled="false"
+            android:text="@string/IA"
+            android:textColor="@color/clouds"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/playSubmitR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_click_r"
+            android:clickable="false"
+            android:enabled="false"
+            android:text="@string/CA"
+            android:textColor="@color/clouds"
+            android:visibility="gone" />
     </LinearLayout>
 
 </ScrollView>

@@ -1,16 +1,9 @@
 package chipset.quizzy.game;
 
 import static chipset.quizzy.resources.Constants.KEY_ADMIN;
-import static chipset.quizzy.resources.Constants.KEY_CROSSED_AT;
-import static chipset.quizzy.resources.Constants.KEY_DEVICE;
 import static chipset.quizzy.resources.Constants.KEY_LAST_LEVEL;
 import static chipset.quizzy.resources.Constants.KEY_NAME;
-import static chipset.quizzy.resources.Constants.KEY_RANK;
-import static chipset.quizzy.resources.Constants.KEY_USERNAME;
 import static chipset.quizzy.resources.Constants.PREFS_FIRST_RUN;
-
-import java.util.Date;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -161,47 +154,7 @@ public class LetsPlayActivity extends Activity {
 					LeaderboardActivity.class));
 
 		} else if (id == R.id.action_my_details) {
-			ParseUser.getCurrentUser().refreshInBackground(
-					new RefreshCallback() {
-
-						@Override
-						public void done(ParseObject user, ParseException e) {
-							if (e == null) {
-								int lastLevel, rank;
-								String name, message, username, device, ll, at;
-								Date crossedAt;
-								username = user.getString(KEY_USERNAME);
-								name = user.getString(KEY_NAME);
-								crossedAt = user.getDate(KEY_CROSSED_AT);
-								device = user.getString(KEY_DEVICE);
-								lastLevel = user.getInt(KEY_LAST_LEVEL);
-								rank = user.getInt(KEY_RANK);
-								ll = String.valueOf(lastLevel);
-								at = "At: ";
-								if (lastLevel < 1) {
-									ll = "Not Played Yet";
-									at = "Joined On:";
-								}
-								message = "Name: " + name + "\nUsername: "
-										+ username + "\nLast Level Completed: "
-										+ ll + "\n" + at
-										+ String.valueOf(crossedAt) + "\nOn: "
-										+ device + "\nRank: "
-										+ String.valueOf(rank);
-								AlertDialog.Builder builder = new AlertDialog.Builder(
-										LetsPlayActivity.this);
-								builder.setCancelable(false);
-								builder.setTitle(R.string.my_details);
-								builder.setMessage(message);
-								builder.setNeutralButton(android.R.string.ok,
-										null);
-								builder.create();
-								builder.show();
-
-							}
-
-						}
-					});
+			functions.getMyDetails(LetsPlayActivity.this);
 
 		} else if (id == R.id.action_rules) {
 

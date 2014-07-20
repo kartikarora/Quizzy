@@ -27,6 +27,7 @@
         android:background="@drawable/button_click"
         android:drawableLeft="@drawable/ic_action_share"
         android:gravity="center"
+        android:paddingLeft="20dp"
         android:text="@string/share"
         android:textColor="@color/turquoize" />
 
