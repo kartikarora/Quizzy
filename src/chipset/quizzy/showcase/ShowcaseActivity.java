@@ -100,6 +100,8 @@ public class ShowcaseActivity extends Activity {
 									public void run() {
 										r.setVisibility(View.GONE);
 										c.setVisibility(View.VISIBLE);
+										c.setText(getResources().getString(
+												R.string.c));
 									}
 								}, 5000);
 								c.setOnClickListener(new OnClickListener() {
